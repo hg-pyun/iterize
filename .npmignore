@@ -1,4 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
+/.gitignore
+/.babelrc
 /package-lock.json
 /node_modules/
 /lib/iterize.dev.js
