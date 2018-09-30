@@ -1,2 +1,2 @@
 # iterize
-minimalistic javascript iterator based on generator
+minimalistic javascript iterators based on generator
