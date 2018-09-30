@@ -7,7 +7,6 @@ class HelloIterize {
 
     print(): void {
         console.log(this.hello);
-        console.log('test babel');
     }
 }
 
