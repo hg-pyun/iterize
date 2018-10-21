@@ -1,10 +1,9 @@
-function* range(start: Number, end: Number, step: Number): any {
-    let n = 0;
-    for (let i:any = start; i < end; i += step) {
-        n++;
-        yield i;
+function* range(start: Number, end: Number = Infinity, step: Number): any {
+    let index: any;
+    for (index = start; index < end; index += step) {
+        yield index;
     }
-    return n;
+    return index;
 }
 
 function* cycle(arr: Array<Number>): any {
