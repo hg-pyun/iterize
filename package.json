@@ -31,6 +31,7 @@
   "scripts": {
     "dev": "babel src/** --watch -o ./lib/iterize.dev.js",
     "build": "cross-env BABEL_ENV=production babel ./src/index.ts -o ./lib/iterize.min.js",
-    "test": "mocha --recursive ./test/*.ts --require ts-node/register"
+    "test": "mocha --recursive ./test/*.ts --require ts-node/register",
+    "test:watch": "mocha --recursive --watch-extensions ts --watch ./test/*.ts --require ts-node/register"
   }
 }
