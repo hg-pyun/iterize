@@ -1,8 +1,15 @@
 function* range(start: Number, end: Number = Infinity, step: Number): any {
-    let index: any;
-    for (index = start; index < end; index += step) {
+    let index: any = start;
+
+    while(index < end) {
+        if(index + step > end) {
+            break;
+        }
+
         yield index;
+        index += step;
     }
+
     return index;
 }
 
