@@ -1,13 +1,32 @@
-class HelloIterize {
-    private hello: string;
-
-    constructor(){
-        this.hello = 'Well begun is half done';
+function* range(start: Number, end: Number, step: Number): any {
+    let n = 0;
+    for (let i:any = start; i < end; i += step) {
+        n++;
+        yield i;
     }
-
-    print(): void {
-        console.log(this.hello);
-    }
+    return n;
 }
 
-export {HelloIterize}
+function* cycle(arr: Array<Number>): any {
+
+}
+
+function* take(count: Number, ): any {
+
+}
+
+function* repeat(): any {
+
+}
+
+function* replicate(): any {
+
+}
+
+export {
+    range,
+    cycle,
+    take,
+    repeat,
+    replicate
+}
