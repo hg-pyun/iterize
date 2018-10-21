@@ -17,6 +17,7 @@
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-modules-umd": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-typescript": "^7.1.0",
     "@types/chai": "^4.1.6",
@@ -27,6 +28,9 @@
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
   },
   "scripts": {
     "dev": "babel src/** --watch -o ./lib/iterize.dev.js",

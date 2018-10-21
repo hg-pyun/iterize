@@ -9,7 +9,8 @@
         "iterize": "Iterize"
       },
       "exactGlobals": true
-    }]
+    }],
+    "@babel/plugin-transform-runtime"
   ],
   "env": {
     "production": {
