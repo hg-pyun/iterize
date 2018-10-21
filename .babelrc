@@ -1,6 +1,11 @@
 {
   "presets": [
-    "@babel/env",
+    ["@babel/env",{
+      "targets": {
+        "chrome": "58",
+        "ie": "11"
+      }
+    }],
     "@babel/preset-typescript"
   ],
   "plugins": [
