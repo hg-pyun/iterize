@@ -1,14 +1,14 @@
 {
   "name": "iterize",
-  "version": "0.0.1",
-  "description": "minimalistic javascript iterator based on generator",
+  "version": "1.0.0",
+  "description": "Minimalistic Javascript Iterators",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hg-pyun/iterize.git"
   },
   "author": "Haegul Pyun",
-  "license": "Apache 2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/hg-pyun/iterize/issues"
   },
