@@ -1,30 +1,37 @@
-function* range(start: Number, end: Number, step: any): any {
-    let index: any = start;
+function* range(start: number, end: number, step: number): any {
 
-    if(index < end) {
-        while(index < end) {
-            if(index + step > end) {
-                break;
-            }
+    if(start === end) {
+        return;
+    }
 
-            yield index;
-            index += step;
-        }
+    let current = start;
+    let finished:number;
+    let checker:Function;
 
-        return index;
+    let next = (value: number) => {
+        return value + step;
+    };
+
+
+    if(start < end) {
+        checker = (value: number) => {
+            return value < finished;
+        };
+        finished = end - 1;
     }
     else {
-        while(index > end) {
-            if(index - step < end) {
-                break;
-            }
-
-            yield index;
-            index -= step;
-        }
-
-        return index;
+        checker = (value: number) => {
+            return value > finished;
+        };
+        finished = end + 1;
     }
+
+    while (checker(current)){
+        yield current;
+        current = next(current);
+    }
+
+    return current;
 }
 
 export default range;
