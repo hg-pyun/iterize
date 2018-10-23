@@ -1,33 +1,7 @@
-function* range(start: Number, end: Number = Infinity, step: Number): any {
-    let index: any = start;
-
-    while(index < end) {
-        if(index + step > end) {
-            break;
-        }
-
-        yield index;
-        index += step;
-    }
-
-    return index;
-}
-
-function* cycle(arr: Array<Number>): any {
-
-}
-
-function* take(count: Number, ): any {
-
-}
-
-function* repeat(): any {
-
-}
-
-function* replicate(): any {
-
-}
+import range from './range';
+import cycle from './cycle';
+import take from './take';
+import { repeat, replicate} from './repeat';
 
 export {
     range,
