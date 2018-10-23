@@ -1,16 +1,30 @@
-function* range(start: Number, end: Number = Infinity, step: Number): any {
+function* range(start: Number, end: Number, step: any): any {
     let index: any = start;
 
-    while(index < end) {
-        if(index + step > end) {
-            break;
+    if(index < end) {
+        while(index < end) {
+            if(index + step > end) {
+                break;
+            }
+
+            yield index;
+            index += step;
         }
 
-        yield index;
-        index += step;
+        return index;
     }
+    else {
+        while(index > end) {
+            if(index - step < end) {
+                break;
+            }
 
-    return index;
+            yield index;
+            index -= step;
+        }
+
+        return index;
+    }
 }
 
 export default range;

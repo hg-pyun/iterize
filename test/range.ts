@@ -39,7 +39,7 @@ describe('Test Range API', () => {
         });
 
         it('decrease number 2', () => {
-            const iter = range(5, 0, 1);
+            const iter = range(5, 0, 2);
             expect(iter.next()).to.deep.equal({value: 5, done: false});
             expect(iter.next()).to.deep.equal({value: 3, done: false});
             expect(iter.next()).to.deep.equal({value: 1, done: true});
