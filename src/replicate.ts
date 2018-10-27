@@ -1,4 +1,4 @@
-function* replicate(count: number, item: number | string): any {
+function* replicate(count: number, item: number | string): Generator {
     if (
         typeof count !== 'number' ||
         (typeof item !== 'number' && typeof item !== 'string')

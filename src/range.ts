@@ -1,4 +1,8 @@
-function* range(start: number, end: number, step: number | Function): any {
+function* range(
+    start: number,
+    end: number,
+    step: number | Function
+): Generator {
     if (start === end) {
         throw new Error('The start and end parameter is same.');
     } else if (

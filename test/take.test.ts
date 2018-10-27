@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { take, cycle } from '../src';
 
-describe('Test Replicate API', () => {
+describe('Test Take API', () => {
     describe('Default case', () => {
         it('cycle type', () => {
             const cycleGenerator = cycle([1, 2, 3]);

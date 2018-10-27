@@ -1,4 +1,4 @@
-function* take(count: Number, iter: Generator): any {
+function* take(count: Number, iter: Generator): Generator {
     if (typeof count !== 'number') {
         throw new Error('Input parameter type is wrong.');
     }
@@ -8,7 +8,7 @@ function* take(count: Number, iter: Generator): any {
         yield iter.next().value;
     }
 
-    return iter.next();
+    return iter.next().value;
 }
 
 export default take;

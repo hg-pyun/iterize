@@ -1,4 +1,4 @@
-function* cycle(arr: Array<any>): any {
+function* cycle(arr: Array<any>): Generator {
     if (arr.length === 0) throw new Error('Array is Empty.');
 
     let index = 0;
