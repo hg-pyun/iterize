@@ -1,32 +1,29 @@
 function* range(start: number, end: number, step: number): any {
-
-    if(start === end) {
-        return;
+    if (start === end) {
+        throw new Error('The start and end parameter is same.');
     }
 
     let current = start;
-    let finished:number;
-    let checker:Function;
+    let finished: number;
+    let checker: Function;
 
     let next = (value: number) => {
         return value + step;
     };
 
-
-    if(start < end) {
+    if (start < end) {
         checker = (value: number) => {
             return value < finished;
         };
         finished = end - 1;
-    }
-    else {
+    } else {
         checker = (value: number) => {
             return value > finished;
         };
         finished = end + 1;
     }
 
-    while (checker(current)){
+    while (checker(current)) {
         yield current;
         current = next(current);
     }

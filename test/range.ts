@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { range } from '../src';
 
 describe('Test Range API', () => {
-    describe('default case', () => {
+    describe('Default case', () => {
         it('increase number 1', () => {
             const iter = range(0, 5, 1);
             expect(iter.next()).to.deep.equal({ value: 0, done: false });
@@ -48,10 +48,11 @@ describe('Test Range API', () => {
         });
     });
 
-    describe('edge case', () => {
-        // todo define exception cases
-        it('Over step the range', () => {
-            const iter = range(0, 1, 2);
+    describe('Edge case', () => {
+        it('start === end', () => {
+            expect(() => range(1, 1, 3).next()).to.throw(
+                'The start and end parameter is same.'
+            );
         });
     });
 });
