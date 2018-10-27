@@ -1,3 +1,5 @@
+import { InputTypeError } from './commons/ErrorModels';
+
 function* range(
     start: number,
     end: number,
@@ -10,7 +12,7 @@ function* range(
         typeof end !== 'number' ||
         (typeof step !== 'number' && typeof step !== 'function')
     ) {
-        throw new Error('Input parameter type is wrong.');
+        throw new InputTypeError();
     }
 
     let current = start;

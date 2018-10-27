@@ -1,6 +1,8 @@
+import { InputTypeError } from './commons/ErrorModels';
+
 function* repeat(item: number | string): Generator {
     if (typeof item !== 'number' && typeof item !== 'string') {
-        throw new Error('Input parameter type is wrong.');
+        throw new InputTypeError();
     }
 
     while (true) {

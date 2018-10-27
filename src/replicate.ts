@@ -1,9 +1,11 @@
+import { InputTypeError } from './commons/ErrorModels';
+
 function* replicate(count: number, item: number | string): Generator {
     if (
         typeof count !== 'number' ||
         (typeof item !== 'number' && typeof item !== 'string')
     ) {
-        throw new Error('Input parameter type is wrong.');
+        throw new InputTypeError();
     }
 
     let index = 0;

@@ -1,6 +1,9 @@
+import { InputTypeError } from './commons/ErrorModels';
+import { isGenerator } from './commons/utility';
+
 function* take(count: Number, iter: Generator): Generator {
-    if (typeof count !== 'number') {
-        throw new Error('Input parameter type is wrong.');
+    if (typeof count !== 'number' || !isGenerator(iter)) {
+        throw new InputTypeError();
     }
 
     let index = 0;
