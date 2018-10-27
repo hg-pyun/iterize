@@ -1,12 +1,11 @@
-function* repeat(): any {
+function* repeat(item: number | string): any {
+    if (typeof item !== 'number' && typeof item !== 'string') {
+        throw new Error('Input parameter type is wrong.');
+    }
 
+    while (true) {
+        yield item;
+    }
 }
 
-function* replicate(): any {
-
-}
-
-export {
-    repeat,
-    replicate,
-}
+export default repeat;

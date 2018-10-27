@@ -1,10 +1,12 @@
 function* range(start: number, end: number, step: number | Function): any {
     if (start === end) {
         throw new Error('The start and end parameter is same.');
-    } else if (typeof start !== 'number' || typeof end !== 'number') {
+    } else if (
+        typeof start !== 'number' ||
+        typeof end !== 'number' ||
+        (typeof step !== 'number' && typeof step !== 'function')
+    ) {
         throw new Error('Input parameter type is wrong.');
-    } else if (typeof step !== 'number' && typeof step !== 'function') {
-        throw new Error('Step type is wrong.');
     }
 
     let current = start;

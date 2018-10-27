@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { range } from '../src';
 
 describe('Test Range API', () => {
-    describe('Step is number type', () => {
+    describe('Default case: Step is number type', () => {
         it('increase number 1', () => {
             const iter = range(0, 5, 1);
             expect(iter.next()).to.deep.equal({ value: 0, done: false });
@@ -48,7 +48,7 @@ describe('Test Range API', () => {
         });
     });
 
-    describe('Step is Function type', () => {
+    describe('Default case: Step is Function type', () => {
         it('increase number 1', () => {
             const iter = range(0, 5, (x: number) => x + 1);
             expect(iter.next()).to.deep.equal({ value: 0, done: false });
@@ -76,26 +76,24 @@ describe('Test Range API', () => {
     });
 
     describe('Edge case', () => {
-        it('start === end', () => {
-            expect(() => range(1, 1, 3).next()).to.throw(
-                'The start and end parameter is same.'
-            );
-        });
-
         it('incorrect input parameter', () => {
             // @ts-ignore
             expect(() => range('a', 2, 3).next()).to.throw(
                 'Input parameter type is wrong.'
             );
-
             // @ts-ignore
             expect(() => range(1, 'b', 3).next()).to.throw(
                 'Input parameter type is wrong.'
             );
-
             // @ts-ignore
             expect(() => range(1, 2, '1').next()).to.throw(
-                'Step type is wrong.'
+                'Input parameter type is wrong.'
+            );
+        });
+
+        it('start === end', () => {
+            expect(() => range(1, 1, 3).next()).to.throw(
+                'The start and end parameter is same.'
             );
         });
     });
