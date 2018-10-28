@@ -2,7 +2,7 @@
 
 > Minimalistic Javascript Iterators
 
-The new features of JavaScript added a great sepc called Iterator. But for most front-end developers, it's a strange concept.
+The JavaScript added a great feature called Iterator. But most front-end developers, it's a strange concept.
 Iterize helps you create code more easily and efficiently using the various attributes of the generator.
 
 ## What is Effective ?
@@ -158,6 +158,12 @@ const cycleIterator = lterize.cycle([1, 2, 3]);
 [...iterize.take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
 ```
 
-# CONTRIBUTE
+# CONTRIBUTING
 
-I always welcome Feedback and Pull Request :)
+### [Contributing Guide](https://github.com/hg-pyun/iterize/blob/master/CONTRIBUTE.md)
+
+Read contributing guide to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Iterize.
+
+# LICENSE
+
+Iterize is [MIT licensed](https://github.com/hg-pyun/iterize/blob/master/LICENSE).
