@@ -1,6 +1,10 @@
-# Created by .ignore support plugin (hsz.mobi)
+# Config
 /.gitignore
 /.babelrc
 /package-lock.json
+/.prettierrc
+/tsconfig.json
+
+# Folders
+/.github/
 /node_modules/
-/lib/iterize.dev.js
