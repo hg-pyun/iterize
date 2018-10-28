@@ -10,7 +10,8 @@ describe('Test Take API', () => {
             expect(iter.next()).to.deep.equal({ value: 2, done: false });
             expect(iter.next()).to.deep.equal({ value: 3, done: false });
             expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: true });
+            expect(iter.next()).to.deep.equal({ value: 2, done: false });
+            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
         });
     });
 
