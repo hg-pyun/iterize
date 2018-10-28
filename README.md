@@ -19,6 +19,12 @@ Conventional grammar cannot easily express the concept of infinity. Iterize can 
 
 Most functions of Iterize are implemented as High-Order Function. You can improve productivity by reusing the functions you have implemented.
 
+# Install
+
+```bash
+$ npm install iterize --save
+```
+
 # API
 
 ## Range
