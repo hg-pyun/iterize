@@ -1,8 +1,8 @@
 {
   "name": "iterize",
-  "version": "1.0.0",
+  "version": "0.9.1",
   "description": "Minimalistic Javascript Iterators",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hg-pyun/iterize.git"
@@ -13,6 +13,13 @@
     "url": "https://github.com/hg-pyun/iterize/issues"
   },
   "homepage": "https://github.com/hg-pyun/iterize#readme",
+  "keywords": [
+    "library",
+    "iterator",
+    "generator",
+    "es6",
+    "helper"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
@@ -47,8 +54,7 @@
     ]
   },
   "scripts": {
-    "dev": "babel src/** --watch -o ./lib/iterize.dev.js",
-    "build": "cross-env BABEL_ENV=production babel ./src/index.ts -o ./lib/iterize.min.js",
+    "build": "cross-env BABEL_ENV=production babel ./src --out-dir lib --extensions '.ts,.tsx'",
     "test": "mocha --recursive ./test/*.ts --require ts-node/register",
     "test:watch": "mocha --recursive --watch-extensions ts --watch ./test/*.ts --require ts-node/register"
   }
