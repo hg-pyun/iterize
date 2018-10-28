@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { replicate } from '../src';
+import { replicate, range } from '../src';
 
 describe('Test Replicate API', () => {
     describe('Default case', () => {
@@ -9,7 +9,8 @@ describe('Test Replicate API', () => {
             expect(iter.next()).to.deep.equal({ value: 0, done: false });
             expect(iter.next()).to.deep.equal({ value: 0, done: false });
             expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: true });
+            expect(iter.next()).to.deep.equal({ value: 0, done: false });
+            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
         });
 
         it('string type', () => {
@@ -18,7 +19,23 @@ describe('Test Replicate API', () => {
             expect(iter.next()).to.deep.equal({ value: 'a', done: false });
             expect(iter.next()).to.deep.equal({ value: 'a', done: false });
             expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: true });
+            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
+            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+        });
+
+        it('generator type', () => {
+            const rangeGenerator = range(1, 5, 1);
+            const iter = replicate(2, rangeGenerator);
+
+            expect(iter.next()).to.deep.equal({ value: 1, done: false });
+            expect(iter.next()).to.deep.equal({ value: 2, done: false });
+            expect(iter.next()).to.deep.equal({ value: 3, done: false });
+            expect(iter.next()).to.deep.equal({ value: 4, done: false });
+            expect(iter.next()).to.deep.equal({ value: 1, done: false });
+            expect(iter.next()).to.deep.equal({ value: 2, done: false });
+            expect(iter.next()).to.deep.equal({ value: 3, done: false });
+            expect(iter.next()).to.deep.equal({ value: 4, done: false });
+            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
         });
     });
 
