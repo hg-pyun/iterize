@@ -4,7 +4,7 @@ function* range(
     start: number,
     end: number,
     step: number | Function
-): Generator {
+): IterableIterator<any> {
     if (start === end) {
         throw new Error('The start and end parameter is same.');
     } else if (
@@ -27,11 +27,11 @@ function* range(
 
     if (start < end) {
         checker = (value: number) => {
-            return next(value) < end;
+            return value < end;
         };
     } else {
         checker = (value: number) => {
-            return next(value) > end;
+            return value > end;
         };
     }
 
@@ -40,7 +40,7 @@ function* range(
         current = next(current);
     }
 
-    return current;
+    return;
 }
 
 export default range;
