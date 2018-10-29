@@ -1,40 +1,23 @@
-import { InputTypeError } from './commons/ErrorModels';
-import { isGenerator } from './commons/utility';
+import { InputTypeError, IllegalArgumentError } from './commons/ErrorModels';
+import { RepeatIterator } from './repeat';
+import { CloneableIterator, PrimitiveIterator } from './base';
 
-function* replicate(
-    count: number,
-    item: number | string | IterableIterator<any>
-): IterableIterator<any> {
+function replicate(count: number, item: number | string) {
     if (
         typeof count !== 'number' ||
         (typeof item !== 'number' &&
-            typeof item !== 'string' &&
-            !isGenerator(item))
+            typeof item !== 'string')
     ) {
         throw new InputTypeError();
     }
-
-    if (isGenerator(item)) {
-        let spreadItem = [...(item as IterableIterator<any>)];
-        let iterItem: any[] = [];
-
-        for (let i = 0; i < count; i++) {
-            iterItem = iterItem.concat(spreadItem);
-        }
-
-        let index = 0;
-        let length = iterItem.length;
-        while (index < length) {
-            yield iterItem[index++ % iterItem.length];
-        }
-    } else {
-        let index = 0;
-        while (index++ < count) {
-            yield item;
-        }
+    
+    if (count < 1) {
+        throw new IllegalArgumentError('replicate count must be larger than 1');
     }
 
-    return;
+    let iterator: CloneableIterator = new PrimitiveIterator(item);
+
+    return new RepeatIterator(iterator, count);
 }
 
 export default replicate;

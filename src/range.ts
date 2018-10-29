@@ -1,46 +1,64 @@
 import { InputTypeError } from './commons/ErrorModels';
+import { CloneableIterator } from './base';
 
-function* range(
+class RangeIterator implements CloneableIterator {
+    start: number;
+    end: number;
+    step: Function;
+
+    current: number;
+
+    constructor(start: number, end: number, step: Function) {
+        this.start = start;
+        this.end = end;
+        this.step = step;
+        this.current = start;
+    }
+
+    [Symbol.iterator]() {
+        return this;
+    }
+
+    public next(value?: any): IteratorResult<any> {
+        if (this.hasNext()) {
+            let value = this.current;
+            this.current = this.step(this.current);
+            return {value: value, done: false}
+        }
+        return {value: undefined, done: true};
+    }
+
+    hasNext() {
+        if (this.start < this.end) {
+            return this.current < this.end;
+        } else {
+            return this.current > this.end;
+        }
+    }
+
+    public clone(): CloneableIterator {
+        return new RangeIterator(this.start, this.end, this.step);
+    }
+}
+
+function range(
     start: number,
     end: number,
     step: number | Function
-): IterableIterator<any> {
-    if (start === end) {
-        throw new Error('The start and end parameter is same.');
-    } else if (
-        typeof start !== 'number' ||
-        typeof end !== 'number' ||
-        (typeof step !== 'number' && typeof step !== 'function')
-    ) {
-        throw new InputTypeError();
+): CloneableIterator {
+    if (typeof start !== 'number' && typeof end !== 'number' && 
+        (typeof step !== 'function' || typeof step !== 'number')) {
+        throw new InputTypeError();    
     }
 
-    let current = start;
-    let checker;
-    let next: any = step;
-
+    let stepFunction: any = step;
     if (typeof step === 'number') {
-        next = (value: number) => {
+        stepFunction = (value: number) => {
             return value + step;
-        };
+        }
     }
 
-    if (start < end) {
-        checker = (value: number) => {
-            return value < end;
-        };
-    } else {
-        checker = (value: number) => {
-            return value > end;
-        };
-    }
-
-    while (checker(current)) {
-        yield current;
-        current = next(current);
-    }
-
-    return;
+    return new RangeIterator(start, end, stepFunction);
 }
 
 export default range;

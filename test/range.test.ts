@@ -84,26 +84,18 @@ describe('Test Range API', () => {
         });
     });
 
-    describe('Edge case', () => {
-        it('incorrect input parameter', () => {
-            // @ts-ignore
-            expect(() => range('a', 2, 3).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => range(1, 'b', 3).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => range(1, 2, '1').next()).to.throw(
-                'Input parameter type is wrong.'
-            );
+    describe('Default case: Compatability with language specifications', () => {
+        it('for - of', () => {
+            let number = 0;
+            for (let n of range(0, 2, 1)) {
+                expect(n).equal(number++);
+            }
+            expect(number).equal(2);
         });
 
-        it('start === end', () => {
-            expect(() => range(1, 1, 3).next()).to.throw(
-                'The start and end parameter is same.'
-            );
-        });
+        it ('[...iterator]', () => {
+            let numbers = [...range(0, 2, 1)];
+            expect(numbers).to.deep.equal([0, 1]);
+        })
     });
 });
