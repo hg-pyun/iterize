@@ -1,23 +1,23 @@
 # iterize
 
-> Minimalistic Javascript Iterators
+> Minimalistic JavaScript Iterators
 
-The JavaScript added a great feature called Iterator. But most front-end developers, it's a strange concept.
-Iterize helps you create code more easily and efficiently using the various attributes of the generator.
+A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers. 
+**iterize** helps you create your code more easily and efficiently using the various attributes of the generator.
 
-## What is Effective ?
+## Why Powerful?
 
 #### Lazy Evaluation
 
-Array does not need to be allocated to memory before. You can use it to calculate at run-time.
+An array does not need to be allocated to memory on compile-time, nor does it need to be declared explicitly. You can let it be calculated on run-time, or any time you want it to be used.
 
-#### Infinite Expression
+#### Expressing Infinity
 
-Conventional grammar cannot easily express the concept of infinity. Iterize can help you express this infinite.
+It was not easy to express the concept of infinity using the conventional syntax of JavaScript. **iterize** can help you express this concept effectively.
 
 #### Reuse
 
-Most functions of Iterize are implemented as High-Order Function. You can improve productivity by reusing the functions you have implemented.
+Most functions of **iterize** are implemented as Higher-Order Functions. You can improve your productivity by reusing the functions you have already implemented before.
 
 # Install
 
@@ -29,7 +29,7 @@ $ npm install iterize --save
 
 ## Range
 
-Returns the transmitter that increases with step within a certain range.
+Returns a transmitter that increases with some steps within a certain range.
 
 #### Interface
 
@@ -51,7 +51,7 @@ import { range } from 'iterize';
 
 #### Interface
 
-Receives an array or an Iterator and returns an emitter that repeats indefinitely.
+Receives an array or an iterator and returns an emitter that repeats infinitely.
 
 ```typescript
 iterize.cycle(item: Array<any> | IterableIterator): IterableIterator;
@@ -89,7 +89,7 @@ iter.next(); // { value: 0, done: false }
 
 ## Repeat
 
-Returns an infinite number or string.
+Returns a number or a string infinitely.
 
 #### Interface
 
@@ -121,7 +121,7 @@ iter.next(); // { value: 'a', done: false }
 
 ## Replicate
 
-Return input number, string, or interator with copy N times.
+Returns the N copies of the input(number, string, or iterator).
 
 #### Interface
 
@@ -147,7 +147,7 @@ const rangeIterator = range(1, 5, 1);
 
 ## Take
 
-Returns the count in the Iterator.
+Returns the first N items of the iterator sequentially.
 
 #### Interface
 
@@ -168,8 +168,8 @@ const cycleIterator = lterize.cycle([1, 2, 3]);
 
 ### [Contributing Guide](https://github.com/hg-pyun/iterize/blob/master/CONTRIBUTE.md)
 
-Read contributing guide to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Iterize.
+Read contributing guide to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to **iterize**.
 
 # LICENSE
 
-Iterize is [MIT licensed](https://github.com/hg-pyun/iterize/blob/master/LICENSE).
+**iterize** is [MIT licensed](https://github.com/hg-pyun/iterize/blob/master/LICENSE).
