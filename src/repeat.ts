@@ -24,5 +24,4 @@ function repeat(item: number | string | CloneableIterator): CloneableIterator {
     return new RepeatIterator(iterable, -1);
 }
 
-export { RepeatIterator };
 export default repeat;

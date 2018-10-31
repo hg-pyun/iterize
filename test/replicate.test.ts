@@ -23,30 +23,20 @@ describe('Test Replicate API', () => {
             expect(iter.next()).to.deep.equal({ value: undefined, done: true });
         });
 
-        it('number type 1', () => {
-            const iter = replicate(2, 0);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            // expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            // expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            // expect(iter.next()).to.deep.equal({ value: 0, done: false });
+        it('generator type', () => {
+            const rangeGenerator = range(1, 5, 1);
+            const iter = replicate(2, rangeGenerator);
+
+            expect(iter.next()).to.deep.equal({ value: 1, done: false });
+            expect(iter.next()).to.deep.equal({ value: 2, done: false });
+            expect(iter.next()).to.deep.equal({ value: 3, done: false });
+            expect(iter.next()).to.deep.equal({ value: 4, done: false });
+            expect(iter.next()).to.deep.equal({ value: 1, done: false });
+            expect(iter.next()).to.deep.equal({ value: 2, done: false });
+            expect(iter.next()).to.deep.equal({ value: 3, done: false });
+            expect(iter.next()).to.deep.equal({ value: 4, done: false });
             expect(iter.next()).to.deep.equal({ value: undefined, done: true });
-        })
-
-        // it('generator type', () => {
-        //     const rangeGenerator = range(1, 5, 1);
-        //     const iter = replicate(2, rangeGenerator);
-
-        //     expect(iter.next()).to.deep.equal({ value: 1, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 2, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 3, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 4, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 1, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 2, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 3, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: 4, done: false });
-        //     expect(iter.next()).to.deep.equal({ value: undefined, done: true });
-        // });
+        });
     });
 
     describe('Edge case', () => {

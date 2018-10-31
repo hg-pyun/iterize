@@ -1,11 +1,10 @@
 import { InputTypeError } from './commons/ErrorModels';
-import { isGenerator } from './commons/utility';
-
+import { isCloneableIterator } from './commons/utility';
 function* take(
     count: Number,
     iter: IterableIterator<any>
 ): IterableIterator<any> {
-    if (typeof count !== 'number' || !isGenerator(iter)) {
+    if (typeof count !== 'number' || !isCloneableIterator(iter)) {
         throw new InputTypeError();
     }
 
