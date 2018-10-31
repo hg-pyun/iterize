@@ -1,6 +1,10 @@
 import { InputTypeError, ArrayEmptyError } from './commons/ErrorModels';
-import { CloneableIterator, isCloneableIterator, ArrayIterator } from './base';
-import { RepeatIterator } from './repeat';
+import {
+    CloneableIterator,
+    ArrayIterator,
+    RepeatIterator,
+} from './commons/Iterators';
+import { isCloneableIterator } from './commons/utility';
 
 function cycle(item: Array<any> | CloneableIterator): CloneableIterator {
     if (!Array.isArray(item) && !isCloneableIterator(item)) {
