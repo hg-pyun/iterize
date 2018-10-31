@@ -12,4 +12,18 @@ class InputTypeError extends Error {
     }
 }
 
-export { ArrayEmptyError, InputTypeError };
+class IllegalArgumentError extends Error {
+    constructor(message: string) {
+        super('Argument is illegal\n' + message);
+        this.name = 'IllegalArgument Error';
+    }
+}
+
+class IllegalIteratorBehaviorError extends Error {
+    constructor(message: string) {
+        super('Behavior of iterator is illegal\n' + message);
+        this.name = 'IllegalIteratorBehavior Error';
+    }
+}
+
+export { ArrayEmptyError, InputTypeError, IllegalArgumentError, IllegalIteratorBehaviorError };
