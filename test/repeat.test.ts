@@ -34,4 +34,17 @@ describe('Test Repeat API', () => {
             );
         });
     });
+
+    describe('Default case: Compatability with language specifications', () => {
+        it('for - of', () => {
+            let count = 0;
+            for (let n of repeat('a')) {
+                if (count === 10) {
+                    break;
+                }
+                expect(n).equal('a');
+                count++;
+            }
+        });
+    });
 });

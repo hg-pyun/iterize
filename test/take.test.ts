@@ -29,4 +29,23 @@ describe('Test Take API', () => {
             );
         });
     });
+
+    describe('Default case: Compatability with language specifications', () => {
+        it('for - of', () => {
+            const cycleGenerator = cycle([1, 2, 3]);
+            const tobe = [1, 2, 3, 1, 2];
+            const result = [];
+            for (let n of take(5, cycleGenerator)) {
+                result.push(n);
+            }
+            expect(result).to.deep.equal(tobe);
+        });
+
+        it('[...iterator]', () => {
+            const tobe = [1, 2, 3, 1, 2];
+            const cycleGenerator = cycle([1, 2, 3]);
+            let numbers = [...take(5, cycleGenerator)];
+            expect(numbers).to.deep.equal(tobe);
+        });
+    });
 });
