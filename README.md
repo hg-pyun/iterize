@@ -31,7 +31,9 @@ You can import **iterize** using ESModule style.
 
 ```js
 import * as iterize from 'iterize';
-or;
+OR
+```
+```js
 import {range} from 'iterize';
 ```
 
@@ -42,7 +44,7 @@ Returns a transmitter that increases with some steps within a certain range.
 #### Interface
 
 ```typescript
-range(start: number, end:number, step: number | Function): Iterator;
+range(start: number, end:number, step: number | Function): Iterator
 ```
 
 #### Example
@@ -62,7 +64,7 @@ import {range} from 'iterize';
 Receives an array or an iterator and returns an emitter that repeats infinitely.
 
 ```typescript
-cycle(item: Array<any> | Iterator): Iterator;
+cycle(item: Array<any> | Iterator): Iterator
 ```
 
 #### Example
