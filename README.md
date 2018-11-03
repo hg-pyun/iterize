@@ -32,7 +32,7 @@ You can import **iterize** using ESModule style.
 ```js
 import * as iterize from 'iterize';
 or;
-import { range } from 'iterize';
+import {range} from 'iterize';
 ```
 
 ## Range
@@ -48,7 +48,7 @@ range(start: number, end:number, step: number | Function): Iterator;
 #### Example
 
 ```js
-import { range } from 'iterize';
+import {range} from 'iterize';
 
 [...range(1, 10, 1)]; // [1, 2, 3 ... 9]
 [...range(1, 10, x => x + 1)]; // [1, 2, 3 ... 9]
@@ -147,7 +147,7 @@ import {replicate} from 'iterize';
 ```
 
 ```js
-import { replicate, range } from 'iterize';
+import {replicate, range} from 'iterize';
 
 const rangeIterator = range(1, 5, 1);
 [...replicate(2, rangeIterator)]; // [1, 2, 3, 4, 1, 2, 3, 4]
@@ -166,7 +166,7 @@ take(count: Number, iter: Iterator): Iterator
 #### Example
 
 ```js
-import { take, cycle } from 'iterize';
+import {take, cycle} from 'iterize';
 
 const cycleIterator = lterize.cycle([1, 2, 3]);
 [...iterize.take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
