@@ -1,15 +1,15 @@
 import { InputTypeError } from './commons/ErrorModels';
-import { CloneableIterator, RangeIterator } from './commons/Iterators';
+import { IterableProtocol, RangeIterator } from './commons/Iterators';
 
 function range(
     start: number,
     end: number,
     step: number | Function
-): CloneableIterator {
+): IterableProtocol {
     if (
         typeof start !== 'number' &&
         typeof end !== 'number' &&
-        (typeof step !== 'function' || typeof step !== 'number')
+        (typeof step !== 'number' || typeof step !== 'function')
     ) {
         throw new InputTypeError();
     }

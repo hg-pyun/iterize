@@ -1,20 +1,20 @@
 import { InputTypeError, ArrayEmptyError } from './commons/ErrorModels';
 import {
-    CloneableIterator,
+    IterableProtocol,
     ArrayIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isCloneableIterator } from './commons/utility';
+import { isIterator } from './commons/utility';
 
-function cycle(item: Array<any> | CloneableIterator): CloneableIterator {
-    if (!Array.isArray(item) && !isCloneableIterator(item)) {
+function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
+    if (!Array.isArray(item) && !isIterator(item)) {
         throw new InputTypeError();
     }
     if (Array.isArray(item) && (item as Array<any>).length === 0) {
         throw new ArrayEmptyError();
     }
 
-    let iterator: CloneableIterator;
+    let iterator: IterableProtocol;
     if (Array.isArray(item)) {
         iterator = new ArrayIterator(item);
     } else {

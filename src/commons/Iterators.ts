@@ -1,11 +1,12 @@
 import { IllegalIteratorBehaviorError } from './ErrorModels';
 
-interface CloneableIterator extends IterableIterator<any> {
+interface IterableProtocol extends IterableIterator<any> {
     // this method should clone the initial state of iterator
-    clone(): CloneableIterator;
+    next(value?: any): IteratorResult<any>;
+    clone(): IterableProtocol;
 }
 
-class PrimitiveIterator implements CloneableIterator {
+class PrimitiveIterator implements IterableProtocol {
     value: number | string;
     done: boolean = false;
 
@@ -25,12 +26,12 @@ class PrimitiveIterator implements CloneableIterator {
         return { value: this.value, done: false };
     }
 
-    public clone(): CloneableIterator {
+    public clone(): IterableProtocol {
         return new PrimitiveIterator(this.value);
     }
 }
 
-class ArrayIterator implements CloneableIterator {
+class ArrayIterator implements IterableProtocol {
     arr: Array<any>;
 
     arrIterator: Iterator<any>;
@@ -49,19 +50,19 @@ class ArrayIterator implements CloneableIterator {
         return this.arrIterator.next();
     }
 
-    public clone(): CloneableIterator {
+    public clone(): IterableProtocol {
         return new ArrayIterator(this.arr);
     }
 }
 
-class RepeatIterator implements CloneableIterator {
+class RepeatIterator implements IterableProtocol {
     static FOREVER: number = -1;
 
-    iterator: CloneableIterator;
+    iterator: IterableProtocol;
     repeatLimit: number;
     repeatCount: number = 1;
 
-    constructor(iterator: CloneableIterator, repeatLimit: number) {
+    constructor(iterator: IterableProtocol, repeatLimit: number) {
         this.iterator = iterator;
         this.repeatLimit = repeatLimit;
     }
@@ -94,12 +95,12 @@ class RepeatIterator implements CloneableIterator {
         return next;
     }
 
-    public clone(): CloneableIterator {
+    public clone(): IterableProtocol {
         return new RepeatIterator(this.iterator, this.repeatLimit);
     }
 }
 
-class RangeIterator implements CloneableIterator {
+class RangeIterator implements IterableProtocol {
     start: number;
     end: number;
     step: Function;
@@ -134,13 +135,13 @@ class RangeIterator implements CloneableIterator {
         }
     }
 
-    public clone(): CloneableIterator {
+    public clone(): IterableProtocol {
         return new RangeIterator(this.start, this.end, this.step);
     }
 }
 
 export {
-    CloneableIterator,
+    IterableProtocol,
     PrimitiveIterator,
     ArrayIterator,
     RepeatIterator,

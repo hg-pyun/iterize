@@ -1,17 +1,17 @@
 import { InputTypeError, IllegalArgumentError } from './commons/ErrorModels';
 import {
-    CloneableIterator,
+    IterableProtocol,
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isCloneableIterator } from './commons/utility';
+import { isIterator } from './commons/utility';
 
-function replicate(count: number, item: number | string | CloneableIterator) {
+function replicate(count: number, item: number | string | IterableProtocol) {
     if (
         typeof count !== 'number' ||
         (typeof item !== 'number' &&
             typeof item !== 'string' &&
-            !isCloneableIterator(item))
+            !isIterator(item))
     ) {
         throw new InputTypeError();
     }
@@ -21,7 +21,7 @@ function replicate(count: number, item: number | string | CloneableIterator) {
     }
 
     let iterator: any = item;
-    if (!isCloneableIterator(item)) {
+    if (!isIterator(item)) {
         iterator = new PrimitiveIterator(item);
     }
 

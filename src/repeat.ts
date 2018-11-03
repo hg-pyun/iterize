@@ -1,21 +1,21 @@
 import { InputTypeError } from './commons/ErrorModels';
 import {
-    CloneableIterator,
+    IterableProtocol,
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isCloneableIterator } from './commons/utility';
+import { isIterator } from './commons/utility';
 
-function repeat(item: number | string | CloneableIterator): CloneableIterator {
+function repeat(item: number | string | IterableProtocol): IterableProtocol {
     if (
         typeof item !== 'number' &&
         typeof item !== 'string' &&
-        !isCloneableIterator(item)
+        !isIterator(item)
     ) {
         throw new InputTypeError();
     }
 
-    let iterable: CloneableIterator;
+    let iterable: IterableProtocol;
     if (typeof item === 'number' || typeof item === 'string') {
         iterable = new PrimitiveIterator(item);
     } else {
