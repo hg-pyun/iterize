@@ -1,4 +1,4 @@
-class ArrayEmptyError extends Error {
+class EmptyArrayError extends Error {
     constructor() {
         super('Array is Empty.');
         this.name = 'Array Error';
@@ -26,4 +26,9 @@ class IllegalIteratorBehaviorError extends Error {
     }
 }
 
-export { ArrayEmptyError, InputTypeError, IllegalArgumentError, IllegalIteratorBehaviorError };
+export {
+    EmptyArrayError,
+    InputTypeError,
+    IllegalArgumentError,
+    IllegalIteratorBehaviorError,
+};

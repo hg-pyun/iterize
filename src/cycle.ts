@@ -1,4 +1,4 @@
-import { InputTypeError, ArrayEmptyError } from './commons/ErrorModels';
+import { InputTypeError, EmptyArrayError } from './commons/ErrorModels';
 import {
     IterableProtocol,
     ArrayIterator,
@@ -11,7 +11,7 @@ function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
         throw new InputTypeError();
     }
     if (Array.isArray(item) && (item as Array<any>).length === 0) {
-        throw new ArrayEmptyError();
+        throw new EmptyArrayError();
     }
 
     let iterator: IterableProtocol;
