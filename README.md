@@ -31,8 +31,8 @@ You can import **iterize** using ESModule style.
 
 ```js
 import * as iterize from 'iterize';
-OR
 ```
+OR
 ```js
 import {range} from 'iterize';
 ```
