@@ -2,7 +2,6 @@ import { IllegalIteratorBehaviorError } from './ErrorModels';
 
 interface IterableProtocol extends IterableIterator<any> {
     // this method should clone the initial state of iterator
-    next(value?: any): IteratorResult<any>;
     clone(): IterableProtocol;
 }
 
