@@ -1,6 +1,6 @@
 {
   "name": "iterize",
-  "version": "0.9.2",
+  "version": "1.0.0",
   "description": "Minimalistic Javascript Iterators",
   "main": "./lib/index.js",
   "repository": {
@@ -18,7 +18,10 @@
     "iterator",
     "generator",
     "es6",
-    "helper"
+    "helper",
+    "iterable protocol",
+    "lazy evaluation",
+    "reuse"
   ],
   "devDependencies": {
     "@babel/cli": "^7.1.2",
