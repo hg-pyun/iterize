@@ -2,8 +2,8 @@
 
 > Minimalistic JavaScript Iterators
 
-A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers. 
-**iterize** helps you create your code more easily and efficiently using the various attributes of the generator.
+A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers.
+**iterize** helps you create your code more easily and efficiently using the various attributes of the Iterable Protocol.
 
 ## Why Powerful?
 
@@ -27,6 +27,14 @@ $ npm install iterize --save
 
 # API
 
+You can import **iterize** using ESModule style.
+
+```js
+import * as iterize from 'iterize';
+or;
+import { range } from 'iterize';
+```
+
 ## Range
 
 Returns a transmitter that increases with some steps within a certain range.
@@ -34,7 +42,7 @@ Returns a transmitter that increases with some steps within a certain range.
 #### Interface
 
 ```typescript
-iterize.range(start: number, end:number, step: number | Function): IterableIterator;
+range(start: number, end:number, step: number | Function): Iterator;
 ```
 
 #### Example
@@ -54,7 +62,7 @@ import { range } from 'iterize';
 Receives an array or an iterator and returns an emitter that repeats infinitely.
 
 ```typescript
-iterize.cycle(item: Array<any> | IterableIterator): IterableIterator;
+cycle(item: Array<any> | Iterator): Iterator;
 ```
 
 #### Example
@@ -94,7 +102,7 @@ Returns a number or a string infinitely.
 #### Interface
 
 ```typescript
-repeat(item: number | string): IterableIterator
+repeat(item: number | string): Iterator
 ```
 
 #### Example
@@ -126,7 +134,7 @@ Returns the N copies of the input(number, string, or iterator).
 #### Interface
 
 ```typescript
-replicate(count: number, item: number | string | IterableIterator): IterableIterator
+replicate(count: number, item: number | string | Iterator): Iterator
 ```
 
 #### Example
@@ -152,7 +160,7 @@ Returns the first N items of the iterator sequentially.
 #### Interface
 
 ```typescript
-take(count: Number, iter: IterableIterator): IterableIterator
+take(count: Number, iter: Iterator): Iterator
 ```
 
 #### Example
