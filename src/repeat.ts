@@ -1,13 +1,27 @@
 import { InputTypeError } from './commons/ErrorModels';
+import {
+    IterableProtocol,
+    PrimitiveIterator,
+    RepeatIterator,
+} from './commons/Iterators';
+import { isIterator } from './commons/utility';
 
-function* repeat(item: number | string): IterableIterator<any> {
-    if (typeof item !== 'number' && typeof item !== 'string') {
+function repeat(item: number | string | IterableProtocol): IterableProtocol {
+    if (
+        typeof item !== 'number' &&
+        typeof item !== 'string' &&
+        !isIterator(item)
+    ) {
         throw new InputTypeError();
     }
 
-    while (true) {
-        yield item;
+    let iterable: IterableProtocol;
+    if (typeof item === 'number' || typeof item === 'string') {
+        iterable = new PrimitiveIterator(item);
+    } else {
+        iterable = item;
     }
+    return new RepeatIterator(iterable, -1);
 }
 
 export default repeat;

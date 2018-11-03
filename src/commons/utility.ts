@@ -1,6 +1,6 @@
-const generatorInstance = function*(): any {};
-function isGenerator(param: any): boolean {
-    return param.constructor === generatorInstance.prototype.constructor;
+import { IterableProtocol } from './Iterators';
+function isIterator(value: any): value is IterableProtocol {
+    return value.next !== undefined && value.clone !== undefined;
 }
 
-export { isGenerator };
+export { isIterator };

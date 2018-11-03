@@ -1,31 +1,27 @@
-import { InputTypeError, ArrayEmptyError } from './commons/ErrorModels';
-import * as utility from './commons/utility';
+import { InputTypeError, EmptyArrayError } from './commons/ErrorModels';
+import {
+    IterableProtocol,
+    ArrayIterator,
+    RepeatIterator,
+} from './commons/Iterators';
+import { isIterator } from './commons/utility';
 
-interface Indexable {
-    [key: string]: any;
-}
-
-function* cycle(
-    item: Array<any> | IterableIterator<any>
-): IterableIterator<any> {
-    const isArray: boolean = Array.isArray(item);
-    const isGenerator: boolean = utility.isGenerator(item);
-    let cycleItem: Indexable = item;
-
-    if (!isArray && !isGenerator) {
+function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
+    if (!Array.isArray(item) && !isIterator(item)) {
         throw new InputTypeError();
-    } else if (isArray && (item as Array<any>).length === 0) {
-        throw new ArrayEmptyError();
+    }
+    if (Array.isArray(item) && (item as Array<any>).length === 0) {
+        throw new EmptyArrayError();
     }
 
-    if (isGenerator) {
-        cycleItem = [...item];
+    let iterator: IterableProtocol;
+    if (Array.isArray(item)) {
+        iterator = new ArrayIterator(item);
+    } else {
+        iterator = item;
     }
 
-    let index = 0;
-    while (true) {
-        yield cycleItem[index++ % cycleItem.length];
-    }
+    return new RepeatIterator(iterator, RepeatIterator.FOREVER);
 }
 
 export default cycle;

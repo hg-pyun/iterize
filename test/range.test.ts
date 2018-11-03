@@ -84,6 +84,21 @@ describe('Test Range API', () => {
         });
     });
 
+    describe('Default case: Compatability with language specifications', () => {
+        it('for - of', () => {
+            let number = 0;
+            for (let n of range(0, 2, 1)) {
+                expect(n).equal(number++);
+            }
+            expect(number).equal(2);
+        });
+
+        it('[...iterator]', () => {
+            let numbers = [...range(0, 2, 1)];
+            expect(numbers).to.deep.equal([0, 1]);
+        });
+    });
+
     describe('Edge case', () => {
         it('incorrect input parameter', () => {
             // @ts-ignore
