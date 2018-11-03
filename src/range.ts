@@ -1,4 +1,4 @@
-import { InputTypeError } from './commons/ErrorModels';
+import { InputTypeError, IllegalArgumentError } from './commons/ErrorModels';
 import { IterableProtocol, RangeIterator } from './commons/Iterators';
 
 function range(
@@ -6,10 +6,12 @@ function range(
     end: number,
     step: number | Function
 ): IterableProtocol {
-    if (
-        typeof start !== 'number' &&
-        typeof end !== 'number' &&
-        (typeof step !== 'number' || typeof step !== 'function')
+    if (start === end) {
+        throw new IllegalArgumentError('The start and end parameter is same.');
+    } else if (
+        typeof start !== 'number' ||
+        typeof end !== 'number' ||
+        (typeof step !== 'number' && typeof step !== 'function')
     ) {
         throw new InputTypeError();
     }
