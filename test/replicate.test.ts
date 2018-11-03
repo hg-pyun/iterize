@@ -55,4 +55,27 @@ describe('Test Replicate API', () => {
             );
         });
     });
+
+    describe('Default case: Compatability with language specifications', () => {
+        it('for - of(default)', () => {
+            for (let n of replicate(5, 0)) {
+                expect(n).equal(0);
+            }
+        });
+
+        it('for - of(generator)', () => {
+            const tobe = [1, 2, 3, 4, 1, 2, 3, 4];
+            const result = [];
+            const rangeGenerator = range(1, 5, 1);
+            for (let n of replicate(2, rangeGenerator)) {
+                result.push(n);
+            }
+            expect(result).to.deep.equal(tobe);
+        });
+
+        it('[...iterator]', () => {
+            let str = [...replicate(5, 'a')];
+            expect(str).to.deep.equal(['a', 'a', 'a', 'a', 'a']);
+        });
+    });
 });

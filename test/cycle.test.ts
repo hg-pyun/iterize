@@ -61,4 +61,35 @@ describe('Test Cycle API', () => {
             expect(() => cycle([]).next()).to.throw('Array is Empty.');
         });
     });
+
+    describe('Default case: Compatability with language specifications', () => {
+        it('for - of (default)', () => {
+            let count = 0;
+            const tobe = [0, 1, 2, 0, 1, 2];
+            const result = [];
+            for (let n of cycle([0, 1, 2])) {
+                if (count === 6) {
+                    break;
+                }
+                result.push(n);
+                count++;
+            }
+            expect(result).to.deep.equal(tobe);
+        });
+
+        it('for - of (generator)', () => {
+            let count = 0;
+            const tobe = [0, 1, 2, 3, 4, 0, 1, 2, 3, 4];
+            const result = [];
+            const rangeGenerator = range(0, 5, 1);
+            for (let n of cycle(rangeGenerator)) {
+                if (count === 10) {
+                    break;
+                }
+                result.push(n);
+                count++;
+            }
+            expect(result).to.deep.equal(tobe);
+        });
+    });
 });
