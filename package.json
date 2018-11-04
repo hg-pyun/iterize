@@ -1,6 +1,6 @@
 {
   "name": "iterize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimalistic Javascript Iterators",
   "main": "./lib/index.js",
   "repository": {
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-modules-umd": "^7.1.0",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
@@ -57,7 +58,7 @@
     ]
   },
   "scripts": {
-    "build": "cross-env BABEL_ENV=production babel ./src --out-dir lib --extensions '.ts,.tsx'",
+    "build": "cross-env BABEL_ENV=production babel ./src --out-dir lib --extensions '.ts'",
     "test": "mocha --recursive ./test/*.ts --require ts-node/register",
     "test:watch": "mocha --recursive --watch-extensions ts --watch ./test/*.ts --require ts-node/register"
   }

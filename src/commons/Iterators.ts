@@ -1,11 +1,11 @@
 import { IllegalIteratorBehaviorError } from './ErrorModels';
 
-interface IterableProtocol extends IterableIterator<any> {
+export interface IterableProtocol extends IterableIterator<any> {
     // this method should clone the initial state of iterator
     clone(): IterableProtocol;
 }
 
-class PrimitiveIterator implements IterableProtocol {
+export class PrimitiveIterator implements IterableProtocol {
     value: number | string;
     done: boolean = false;
 
@@ -30,7 +30,7 @@ class PrimitiveIterator implements IterableProtocol {
     }
 }
 
-class ArrayIterator implements IterableProtocol {
+export class ArrayIterator implements IterableProtocol {
     arr: Array<any>;
 
     arrIterator: Iterator<any>;
@@ -54,7 +54,7 @@ class ArrayIterator implements IterableProtocol {
     }
 }
 
-class RepeatIterator implements IterableProtocol {
+export class RepeatIterator implements IterableProtocol {
     static FOREVER: number = -1;
 
     iterator: IterableProtocol;
@@ -99,7 +99,7 @@ class RepeatIterator implements IterableProtocol {
     }
 }
 
-class RangeIterator implements IterableProtocol {
+export class RangeIterator implements IterableProtocol {
     start: number;
     end: number;
     step: Function;
@@ -138,11 +138,3 @@ class RangeIterator implements IterableProtocol {
         return new RangeIterator(this.start, this.end, this.step);
     }
 }
-
-export {
-    IterableProtocol,
-    PrimitiveIterator,
-    ArrayIterator,
-    RepeatIterator,
-    RangeIterator,
-};
