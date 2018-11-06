@@ -170,7 +170,7 @@ take(count: Number, iter: Iterator): Iterator
 ```js
 import {take, cycle} from 'iterize';
 
-const cycleIterator = lterize.cycle([1, 2, 3]);
+const cycleIterator = iterize.cycle([1, 2, 3]);
 [...iterize.take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
 ```
 
