@@ -190,16 +190,16 @@ take(count: Number, iter: Iterator): Iterator
 ```js
 import {take, cycle} from 'iterize';
 
-const cycleIterator = iterize.cycle([1, 2, 3]);
-[...iterize.take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
+const cycleIterator = cycle([1, 2, 3]);
+[...take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
 ```
 
 ```js
 import {take, cycle} from 'iterize';
 
-const cycleIterator = iterize.cycle([1, 2, 3]);
+const cycleIterator = cycle([1, 2, 3]);
 let result = [];
-for (let number of iterize.take(2, cycle)) {
+for (let number of take(2, cycleIterator)) {
     result.push(number);
 }
 console.log(result);  // [1, 2]
