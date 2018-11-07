@@ -57,6 +57,16 @@ import {range} from 'iterize';
 [...range(2, 64, x => x * x)]; // [2, 4, 16]
 ```
 
+```js
+import {range} from 'iterize';
+
+let result = [];
+for (let number of range(1, 3, 1)) {
+    result.push(number);
+}
+console.log(result);  // [1, 2, 3]
+```
+
 ## Cycle
 
 #### Interface
@@ -149,6 +159,16 @@ import {replicate} from 'iterize';
 ```
 
 ```js
+import {replicate} from 'iterize';
+
+let result = [];
+for (let number of replicate(3, 0)) {
+    result.push(number);
+}
+console.log(result);  // [0, 0, 0]
+```
+
+```js
 import {replicate, range} from 'iterize';
 
 const rangeIterator = range(1, 5, 1);
@@ -170,8 +190,19 @@ take(count: Number, iter: Iterator): Iterator
 ```js
 import {take, cycle} from 'iterize';
 
-const cycleIterator = lterize.cycle([1, 2, 3]);
-[...iterize.take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
+const cycleIterator = cycle([1, 2, 3]);
+[...take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
+```
+
+```js
+import {take, cycle} from 'iterize';
+
+const cycleIterator = cycle([1, 2, 3]);
+let result = [];
+for (let number of take(2, cycleIterator)) {
+    result.push(number);
+}
+console.log(result);  // [1, 2]
 ```
 
 # CONTRIBUTING
