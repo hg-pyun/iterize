@@ -39,6 +39,7 @@
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
+    "precise-commits": "^1.0.2",
     "prettier": "1.14.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
@@ -48,14 +49,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "precise-commits"
     }
-  },
-  "lint-staged": {
-    "*.{ts,css}": [
-      "prettier --write",
-      "git add"
-    ]
   },
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel ./src --out-dir lib --extensions '.ts'",
