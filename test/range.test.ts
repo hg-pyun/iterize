@@ -97,14 +97,14 @@ describe('Test Range API', () => {
 
         it('square x^2', () => {
             const iter = range(2, 64, (x: number) => x * x);
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 16, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(4));
+            expect(iter.next()).to.deep.equal(iterResult(16));
+            expect(iter.next()).to.deep.equal(iterDone());
         });
     });
 
-    describe('Default case: Compatability with language specifications', () => {
+    describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             let number = 0;
             for (let n of range(0, 2, 1)) {
@@ -139,21 +139,6 @@ describe('Test Range API', () => {
             expect(() => range(1, 1, 3).next()).to.throw(
                 'The start and end parameter is same.'
             );
-        });
-    });
-
-    describe('Default case: Compatability with language specifications', () => {
-        it('for - of', () => {
-            let number = 0;
-            for (let n of range(0, 2, 1)) {
-                expect(n).equal(number++);
-            }
-            expect(number).equal(2);
-        });
-
-        it('[...iterator]', () => {
-            let numbers = [...range(0, 2, 1)];
-            expect(numbers).to.deep.equal([0, 1]);
         });
     });
 });
