@@ -1,7 +1,7 @@
 # iterize
 
 [![npm](https://img.shields.io/npm/v/iterize.svg)](https://www.npmjs.com/package/iterize)
-![npm](https://img.shields.io/npm/dm/iterize.svg)
+![npm](https://img.shields.io/npm/dt/iterize.svg)
 [![GitHub license](https://img.shields.io/github/license/hg-pyun/iterize.svg)](https://github.com/hg-pyun/iterize/blob/master/LICENSE)
 
 > Minimalistic JavaScript Iterators
