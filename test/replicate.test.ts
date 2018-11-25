@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { replicate, range } from '../src';
-import {iterResult, iterDone} from './utility';
+import { iterResult, iterDone } from './utility';
 
 describe('Test Replicate API', () => {
     describe('Default case', () => {

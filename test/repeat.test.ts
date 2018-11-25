@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { repeat } from '../src';
-import {iterResult} from "./utility";
+import { iterResult } from './utility';
 
 describe('Test Repeat API', () => {
     describe('Default case', () => {

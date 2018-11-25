@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { range, take, cycle } from '../src';
-import {iterDone, iterResult} from "./utility";
-import repeat from "../src/repeat";
-import replicate from "../src/replicate";
+import { iterDone, iterResult } from './utility';
+import repeat from '../src/repeat';
+import replicate from '../src/replicate';
 
 describe('Test Take API', () => {
     describe('Default case', () => {
@@ -48,15 +48,11 @@ describe('Test Take API', () => {
     describe('Edge case', () => {
         it('incorrect input parameter', () => {
             // @ts-ignore
-            expect(() => take(5, 5).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
+            expect(() => take(5, 5).next()).to.throw('Input parameter type is wrong.');
 
             const cycleIterator = cycle([1, 2, 3]);
             // @ts-ignore
-            expect(() => take('a', cycleIterator).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
+            expect(() => take('a', cycleIterator).next()).to.throw('Input parameter type is wrong.');
         });
     });
 

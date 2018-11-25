@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { range, cycle } from '../src';
-import {iterResult} from "./utility";
+import { iterResult } from './utility';
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
