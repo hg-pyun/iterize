@@ -1,50 +1,48 @@
 import { expect } from 'chai';
 import { range, cycle } from '../src';
+import {iterResult} from "./utility";
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
         it('array type [0, 1, 2]', () => {
             const iter = cycle([0, 1, 2]);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(2));
         });
 
         it("array type ['a', 'b', 'c']", () => {
             const iter = cycle(['a', 'b', 'c']);
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'b', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'c', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'b', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'c', done: false });
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('b'));
+            expect(iter.next()).to.deep.equal(iterResult('c'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('b'));
+            expect(iter.next()).to.deep.equal(iterResult('c'));
         });
 
         it('generator type [0, 1, 2, 3, 4] ', () => {
-            const rangeGenerator = range(0, 5, 1);
-            const iter = cycle(rangeGenerator);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
+            const rangeIterator = range(0, 5, 1);
+            const iter = cycle(rangeIterator);
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(3));
+            expect(iter.next()).to.deep.equal(iterResult(4));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(1));
         });
 
         it('generator type [0, 2, 4] ', () => {
-            const rangeGenerator = range(0, 5, 2);
-            const iter = cycle(rangeGenerator);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
+            const rangeIterator = range(0, 5, 2);
+            const iter = cycle(rangeIterator);
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(4));
+            expect(iter.next()).to.deep.equal(iterResult(0));
         });
     });
 
@@ -62,7 +60,7 @@ describe('Test Cycle API', () => {
         });
     });
 
-    describe('Default case: Compatability with language specifications', () => {
+    describe('Default case: Compatibility with language specifications', () => {
         it('for - of (default)', () => {
             let count = 0;
             const tobe = [0, 1, 2, 0, 1, 2];
@@ -81,8 +79,8 @@ describe('Test Cycle API', () => {
             let count = 0;
             const tobe = [0, 1, 2, 3, 4, 0, 1, 2, 3, 4];
             const result = [];
-            const rangeGenerator = range(0, 5, 1);
-            for (let n of cycle(rangeGenerator)) {
+            const rangeIterator = range(0, 5, 1);
+            for (let n of cycle(rangeIterator)) {
                 if (count === 10) {
                     break;
                 }

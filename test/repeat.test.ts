@@ -1,24 +1,21 @@
 import { expect } from 'chai';
 import { repeat } from '../src';
+import {iterResult} from "./utility";
 
 describe('Test Repeat API', () => {
     describe('Default case', () => {
         it('number type', () => {
             const iter = repeat(0);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
         });
 
         it('string type', () => {
             const iter = repeat('a');
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
         });
     });
 
@@ -35,7 +32,7 @@ describe('Test Repeat API', () => {
         });
     });
 
-    describe('Default case: Compatability with language specifications', () => {
+    describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             let count = 0;
             for (let n of repeat('a')) {
