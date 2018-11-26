@@ -1,41 +1,42 @@
 import { expect } from 'chai';
 import { replicate, range } from '../src';
+import { iterResult, iterDone } from './utility';
 
 describe('Test Replicate API', () => {
     describe('Default case', () => {
         it('number type', () => {
             const iter = replicate(5, 0);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterDone());
         });
 
         it('string type', () => {
             const iter = replicate(5, 'a');
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterDone());
         });
 
         it('generator type', () => {
-            const rangeGenerator = range(1, 5, 1);
-            const iter = replicate(2, rangeGenerator);
+            const rangeIterator = range(1, 5, 1);
+            const iter = replicate(2, rangeIterator);
 
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(3));
+            expect(iter.next()).to.deep.equal(iterResult(4));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(3));
+            expect(iter.next()).to.deep.equal(iterResult(4));
+            expect(iter.next()).to.deep.equal(iterDone());
         });
     });
 
@@ -56,7 +57,7 @@ describe('Test Replicate API', () => {
         });
     });
 
-    describe('Default case: Compatability with language specifications', () => {
+    describe('Default case: Compatibility with language specifications', () => {
         it('for - of(default)', () => {
             for (let n of replicate(5, 0)) {
                 expect(n).equal(0);
@@ -66,8 +67,8 @@ describe('Test Replicate API', () => {
         it('for - of(generator)', () => {
             const tobe = [1, 2, 3, 4, 1, 2, 3, 4];
             const result = [];
-            const rangeGenerator = range(1, 5, 1);
-            for (let n of replicate(2, rangeGenerator)) {
+            const rangeIterator = range(1, 5, 1);
+            for (let n of replicate(2, rangeIterator)) {
                 result.push(n);
             }
             expect(result).to.deep.equal(tobe);
