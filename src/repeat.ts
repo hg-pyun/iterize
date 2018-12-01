@@ -6,22 +6,25 @@ import {
 } from './commons/Iterators';
 import { isIterator } from './commons/utility';
 
-function repeat(item: number | string | IterableProtocol): IterableProtocol {
+function repeat(
+    item: number | string | Function | IterableProtocol
+): IterableProtocol {
     if (
         typeof item !== 'number' &&
         typeof item !== 'string' &&
+        typeof item !== 'function' &&
         !isIterator(item)
     ) {
         throw new ArgumentError('Please check arguments type.');
     }
 
-    let iterable: IterableProtocol;
-    if (typeof item === 'number' || typeof item === 'string') {
-        iterable = new PrimitiveIterator(item);
+    let iterator: IterableProtocol;
+    if (!isIterator(item)) {
+        iterator = new PrimitiveIterator(item);
     } else {
-        iterable = item;
+        iterator = item;
     }
-    return new RepeatIterator(iterable, -1);
+    return new RepeatIterator(iterator, -1);
 }
 
 export default repeat;

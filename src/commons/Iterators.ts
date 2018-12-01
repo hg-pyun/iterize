@@ -6,10 +6,10 @@ export interface IterableProtocol extends IterableIterator<any> {
 }
 
 export class PrimitiveIterator implements IterableProtocol {
-    value: number | string;
+    value: number | string | Function;
     done: boolean = false;
 
-    constructor(value: number | string) {
+    constructor(value: number | string | Function) {
         this.value = value;
     }
 
