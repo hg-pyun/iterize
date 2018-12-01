@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import {assert, expect} from 'chai';
 import { repeat } from '../src';
 import { iterResult } from './utility';
 
@@ -16,6 +16,15 @@ describe('Test Repeat API', () => {
             expect(iter.next()).to.deep.equal(iterResult('a'));
             expect(iter.next()).to.deep.equal(iterResult('a'));
             expect(iter.next()).to.deep.equal(iterResult('a'));
+        });
+
+        it('function Type', () => {
+            const iter = repeat(() => { return 1;});
+
+            // Check iter.next().value equals function.
+            for (let i = 0; i < 5; i++) {
+                assert.isFunction(iter.next().value);
+            }
         });
     });
 
@@ -36,8 +45,6 @@ describe('Test Repeat API', () => {
         it('incorrect input parameter', () => {
             // @ts-ignore
             expect(() => repeat(['a']).next()).to.throw();
-            // @ts-ignore
-            expect(() => repeat(() => 1).next()).to.throw();
         });
     });
 });
