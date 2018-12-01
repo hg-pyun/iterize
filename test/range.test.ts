@@ -104,6 +104,20 @@ describe('Test Range API', () => {
         });
     });
 
+    describe('Default case: overloading', () => {
+        it('one parameter', () => {
+            const increaseNumberOne = range(5);
+            increaseTester(0, 5, 1, increaseNumberOne);
+        });
+
+        it('two parameter', () => {
+            const increaseNumberOne = range(0, 5);
+            const decreaseNumberOne = range(5, 0);
+            increaseTester(0, 5, 1, increaseNumberOne);
+            decreaseTester(5, 0, -1, decreaseNumberOne);
+        });
+    });
+
     describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             let number = 0;
@@ -130,6 +144,7 @@ describe('Test Range API', () => {
         });
 
         it('start === end', () => {
+            expect(() => range(1, 1).next()).to.throw();
             expect(() => range(1, 1, 3).next()).to.throw();
         });
     });
