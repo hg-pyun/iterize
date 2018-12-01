@@ -1,4 +1,4 @@
-import { InputTypeError, EmptyArrayError } from './commons/ErrorModels';
+import { ArgumentError } from './commons/ErrorModels';
 import {
     IterableProtocol,
     ArrayIterator,
@@ -8,10 +8,10 @@ import { isIterator } from './commons/utility';
 
 function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
     if (!Array.isArray(item) && !isIterator(item)) {
-        throw new InputTypeError();
+        throw new ArgumentError('Please check arguments type.');
     }
     if (Array.isArray(item) && (item as Array<any>).length === 0) {
-        throw new EmptyArrayError();
+        throw new ArgumentError('Array is empty.');
     }
 
     let iterator: IterableProtocol;

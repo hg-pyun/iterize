@@ -1,4 +1,4 @@
-import { InputTypeError } from './commons/ErrorModels';
+import { ArgumentError } from './commons/ErrorModels';
 import {
     IterableProtocol,
     PrimitiveIterator,
@@ -12,7 +12,7 @@ function repeat(item: number | string | IterableProtocol): IterableProtocol {
         typeof item !== 'string' &&
         !isIterator(item)
     ) {
-        throw new InputTypeError();
+        throw new ArgumentError('Please check arguments type.');
     }
 
     let iterable: IterableProtocol;

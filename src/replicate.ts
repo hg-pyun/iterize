@@ -1,4 +1,4 @@
-import { InputTypeError, IllegalArgumentError } from './commons/ErrorModels';
+import { ArgumentError } from './commons/ErrorModels';
 import {
     IterableProtocol,
     PrimitiveIterator,
@@ -13,11 +13,11 @@ function replicate(count: number, item: number | string | IterableProtocol) {
             typeof item !== 'string' &&
             !isIterator(item))
     ) {
-        throw new InputTypeError();
+        throw new ArgumentError('Please check arguments type.');
     }
 
     if (count < 1) {
-        throw new IllegalArgumentError('replicate count must be larger than 1');
+        throw new ArgumentError('Replicate count must be larger than 1.');
     }
 
     let iterator: any = item;

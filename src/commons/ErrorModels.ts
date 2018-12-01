@@ -1,34 +1,18 @@
-class EmptyArrayError extends Error {
-    constructor() {
-        super('Array is Empty.');
-        this.name = 'Array Error';
-    }
-}
-
-class InputTypeError extends Error {
-    constructor() {
-        super('Input parameter type is wrong.');
-        this.name = 'InputType Error';
-    }
-}
-
-class IllegalArgumentError extends Error {
+class ArgumentError extends Error {
     constructor(message: string) {
-        super('Argument is illegal\n' + message);
-        this.name = 'IllegalArgument Error';
+        super(message);
+        this.name = 'Argument Error';
     }
 }
 
-class IllegalIteratorBehaviorError extends Error {
+class BehaviorError extends Error {
     constructor(message: string) {
-        super('Behavior of iterator is illegal\n' + message);
-        this.name = 'IllegalIteratorBehavior Error';
+        super(message);
+        this.name = 'IteratorBehavior Error';
     }
 }
 
 export {
-    EmptyArrayError,
-    InputTypeError,
-    IllegalArgumentError,
-    IllegalIteratorBehaviorError,
+    ArgumentError,
+    BehaviorError,
 };
