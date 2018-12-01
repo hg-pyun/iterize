@@ -118,7 +118,7 @@ Returns a number or a string infinitely.
 #### Interface
 
 ```typescript
-repeat(item: number | string): Iterator
+repeat(item: number | string| Function): Iterator
 ```
 
 #### Example
@@ -150,7 +150,7 @@ Returns the N copies of the input(number, string, or iterator).
 #### Interface
 
 ```typescript
-replicate(count: number, item: number | string | Iterator): Iterator
+replicate(count: number, item: number | string | Function | Iterator): Iterator
 ```
 
 #### Example
