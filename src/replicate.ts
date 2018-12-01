@@ -6,23 +6,32 @@ import {
 } from './commons/Iterators';
 import { isIterator } from './commons/utility';
 
-function replicate(count: number, item: number | string | IterableProtocol) {
-    if (
-        typeof count !== 'number' ||
-        (typeof item !== 'number' &&
-            typeof item !== 'string' &&
-            !isIterator(item))
-    ) {
-        throw new ArgumentError('Please check arguments type.');
+function replicate(
+    count: number,
+    item: number | string | Function | IterableProtocol
+) {
+    if (typeof count !== 'number') {
+        throw new ArgumentError('Count argument must be number type.');
     }
 
     if (count < 1) {
         throw new ArgumentError('Replicate count must be larger than 1.');
     }
 
-    let iterator: any = item;
+    if (
+        typeof item !== 'number' &&
+        typeof item !== 'string' &&
+        typeof item !== 'function' &&
+        !isIterator(item)
+    ) {
+        throw new ArgumentError('Please check arguments type.');
+    }
+
+    let iterator: IterableProtocol;
     if (!isIterator(item)) {
         iterator = new PrimitiveIterator(item);
+    } else {
+        iterator = item;
     }
 
     return new RepeatIterator(iterator, count);

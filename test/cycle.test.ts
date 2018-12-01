@@ -1,5 +1,5 @@
 import { assert, expect } from 'chai';
-import { range, cycle } from '../src';
+import { cycle, range } from '../src';
 import { iterResult } from './utility';
 
 describe('Test Cycle API', () => {
@@ -25,13 +25,17 @@ describe('Test Cycle API', () => {
         });
 
         it('function Type', () => {
-            const iter = cycle([() => {
-                return 1;
-            }, () => {
-                return 2;
-            }, () => {
-                return 3;
-            }]);
+            const iter = cycle([
+                () => {
+                    return 1;
+                },
+                () => {
+                    return 2;
+                },
+                () => {
+                    return 3;
+                },
+            ]);
 
             // Check iter.next().value equals function.
             for (let i = 0; i < 5; i++) {

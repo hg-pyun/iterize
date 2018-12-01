@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
-import { replicate, range } from '../src';
-import { iterResult, iterDone } from './utility';
+import { range, replicate } from '../src';
+import { iterDone, iterResult } from './utility';
 
 describe('Test Replicate API', () => {
     describe('Default case', () => {
@@ -25,7 +25,9 @@ describe('Test Replicate API', () => {
         });
 
         it('function Type', () => {
-            const iter = replicate(5, ()=>{ return 1;});
+            const iter = replicate(5, () => {
+                return 1;
+            });
 
             // Check iter.next().value equals function.
             for (let i = 0; i < 5; i++) {

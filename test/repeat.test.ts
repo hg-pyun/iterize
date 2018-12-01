@@ -1,4 +1,4 @@
-import {assert, expect} from 'chai';
+import { assert, expect } from 'chai';
 import { repeat } from '../src';
 import { iterResult } from './utility';
 
@@ -19,7 +19,9 @@ describe('Test Repeat API', () => {
         });
 
         it('function Type', () => {
-            const iter = repeat(() => { return 1;});
+            const iter = repeat(() => {
+                return 1;
+            });
 
             // Check iter.next().value equals function.
             for (let i = 0; i < 5; i++) {
