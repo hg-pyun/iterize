@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { range, cycle } from '../src';
 import { iterResult } from './utility';
-import {ArgumentError} from "../src/commons/ErrorModels";
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
