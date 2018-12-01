@@ -48,14 +48,16 @@ Returns a transmitter that increases with some steps within a certain range.
 #### Interface
 
 ```typescript
-range(start: number, end:number, step: number | Function): Iterator
+range(start: number, end?:number, step?: number | Function): Iterator
 ```
 
 #### Example
 
 ```js
 import {range} from 'iterize';
-
+[...range(5)];  // [0, 1, 2, 3, 4]
+[...range(0, 5)]; // [0, 1, 2, 3, 4]
+[...range(5, 0)]; // [5, 4, 3, 2, 1]
 [...range(1, 10, 1)]; // [1, 2, 3 ... 9]
 [...range(1, 10, x => x + 1)]; // [1, 2, 3 ... 9]
 [...range(2, 64, x => x * x)]; // [2, 4, 16]
