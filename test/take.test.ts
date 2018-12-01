@@ -45,17 +45,6 @@ describe('Test Take API', () => {
         });
     });
 
-    describe('Edge case', () => {
-        it('incorrect input parameter', () => {
-            // @ts-ignore
-            expect(() => take(5, 5).next()).to.throw('Input parameter type is wrong.');
-
-            const cycleIterator = cycle([1, 2, 3]);
-            // @ts-ignore
-            expect(() => take('a', cycleIterator).next()).to.throw('Input parameter type is wrong.');
-        });
-    });
-
     describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             const cycleIterator = cycle([1, 2, 3]);
@@ -72,6 +61,17 @@ describe('Test Take API', () => {
             const cycleIterator = cycle([1, 2, 3]);
             let numbers = [...take(5, cycleIterator)];
             expect(numbers).to.deep.equal(tobe);
+        });
+    });
+
+    describe('Edge case', () => {
+        it('incorrect input parameter', () => {
+            // @ts-ignore
+            expect(() => take(5, 5).next()).to.throw();
+
+            const cycleIterator = cycle([1, 2, 3]);
+            // @ts-ignore
+            expect(() => take('a', cycleIterator).next()).to.throw();
         });
     });
 });

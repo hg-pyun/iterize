@@ -19,19 +19,6 @@ describe('Test Repeat API', () => {
         });
     });
 
-    describe('Edge case', () => {
-        it('incorrect input parameter', () => {
-            // @ts-ignore
-            expect(() => repeat(['a']).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => repeat(() => 1).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-        });
-    });
-
     describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             let count = 0;
@@ -42,6 +29,15 @@ describe('Test Repeat API', () => {
                 expect(n).equal('a');
                 count++;
             }
+        });
+    });
+
+    describe('Edge case', () => {
+        it('incorrect input parameter', () => {
+            // @ts-ignore
+            expect(() => repeat(['a']).next()).to.throw();
+            // @ts-ignore
+            expect(() => repeat(() => 1).next()).to.throw();
         });
     });
 });

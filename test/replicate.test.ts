@@ -40,23 +40,6 @@ describe('Test Replicate API', () => {
         });
     });
 
-    describe('Edge case', () => {
-        it('incorrect input parameter', () => {
-            // @ts-ignore
-            expect(() => replicate(5, ['a']).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => replicate(5, () => 1).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => replicate('a', 10).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-        });
-    });
-
     describe('Default case: Compatibility with language specifications', () => {
         it('for - of(default)', () => {
             for (let n of replicate(5, 0)) {
@@ -77,6 +60,17 @@ describe('Test Replicate API', () => {
         it('[...iterator]', () => {
             let str = [...replicate(5, 'a')];
             expect(str).to.deep.equal(['a', 'a', 'a', 'a', 'a']);
+        });
+    });
+
+    describe('Edge case', () => {
+        it('incorrect input parameter', () => {
+            // @ts-ignore
+            expect(() => replicate(5, ['a']).next()).to.throw();
+            // @ts-ignore
+            expect(() => replicate(5, () => 1).next()).to.throw();
+            // @ts-ignore
+            expect(() => replicate('a', 10).next()).to.throw();
         });
     });
 });

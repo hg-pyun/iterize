@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { range, cycle } from '../src';
 import { iterResult } from './utility';
+import {ArgumentError} from "../src/commons/ErrorModels";
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
@@ -46,20 +47,6 @@ describe('Test Cycle API', () => {
         });
     });
 
-    describe('Edge case', () => {
-        it('empty parameter', () => {
-            // @ts-ignore
-            expect(() => cycle(1).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => cycle('a').next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            expect(() => cycle([]).next()).to.throw('Array is Empty.');
-        });
-    });
-
     describe('Default case: Compatibility with language specifications', () => {
         it('for - of (default)', () => {
             let count = 0;
@@ -88,6 +75,16 @@ describe('Test Cycle API', () => {
                 count++;
             }
             expect(result).to.deep.equal(tobe);
+        });
+    });
+
+    describe('Edge case', () => {
+        it('empty parameter', () => {
+            // @ts-ignore
+            expect(() => cycle(1).next()).to.throw();
+            // @ts-ignore
+            expect(() => cycle('a').next()).to.throw();
+            expect(() => cycle([]).next()).to.throw();
         });
     });
 });
