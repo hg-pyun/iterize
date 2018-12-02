@@ -1,12 +1,12 @@
 # iterize
 
 [![npm](https://img.shields.io/npm/v/iterize.svg)](https://www.npmjs.com/package/iterize)
-![npm](https://img.shields.io/npm/dt/iterize.svg)
+[![npm](https://img.shields.io/npm/dt/iterize.svg)](https://www.npmjs.com/package/iterize)
 [![GitHub license](https://img.shields.io/github/license/hg-pyun/iterize.svg)](https://github.com/hg-pyun/iterize/blob/master/LICENSE)
 
-> Minimalistic JavaScript Iterators
+> Use JavaScript Iterator, Easily 
 
-A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers.
+**iterize** is minimalistic creator for iterator. A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers.
 **iterize** helps you create your code more easily and efficiently using the various attributes of the Iterable Protocol.
 
 ## Why Powerful?
@@ -29,17 +29,21 @@ Most functions of **iterize** are implemented as Higher-Order Functions. You can
 $ npm install iterize --save
 ```
 
-# API
-
 You can import **iterize** using ESModule style.
 
 ```js
 import * as iterize from 'iterize';
 ```
-OR
 ```js
 import {range} from 'iterize';
 ```
+
+# API
+- [Range](https://github.com/hg-pyun/iterize#range)
+- [Cycle](https://github.com/hg-pyun/iterize#cycle)
+- [Repeat](https://github.com/hg-pyun/iterize#repeat)
+- [Replicate](https://github.com/hg-pyun/iterize#replicate)
+- [Take](https://github.com/hg-pyun/iterize#take)
 
 ## Range
 
@@ -48,27 +52,33 @@ Returns a transmitter that increases with some steps within a certain range.
 #### Interface
 
 ```typescript
-range(start: number, end:number, step: number | Function): Iterator
+range(start: number, end?:number, step?: number | Function): Iterator
 ```
 
 #### Example
+You can use with `for-of` syntax.
+```js
+import {range} from 'iterize';
 
+for (let number of range(5)) {
+    console.log(number);  // 0, 1, 2, 3, 4
+}
+
+for (let number of range(0, 5)) {
+    console.log(number);  // 0, 1, 2, 3, 4
+}
+
+for (let number of range(0, 5, 2)) {
+    console.log(number);  // 0, 2, 4
+}
+```
+With spread operator.
 ```js
 import {range} from 'iterize';
 
 [...range(1, 10, 1)]; // [1, 2, 3 ... 9]
 [...range(1, 10, x => x + 1)]; // [1, 2, 3 ... 9]
 [...range(2, 64, x => x * x)]; // [2, 4, 16]
-```
-
-```js
-import {range} from 'iterize';
-
-let result = [];
-for (let number of range(1, 3, 1)) {
-    result.push(number);
-}
-console.log(result);  // [1, 2, 3]
 ```
 
 ## Cycle
@@ -95,7 +105,7 @@ iter.next(); // { value: 1, done: false }
 iter.next(); // { value: 2, done: false }
 ...
 ```
-
+`Cycle` can also receive range iterator.
 ```js
 import {cycle, range} from 'iterize';
 
@@ -154,24 +164,20 @@ replicate(count: number, item: number | string | Iterator): Iterator
 ```
 
 #### Example
+```js
+import {replicate} from 'iterize';
 
+for (let number of replicate(3, 1)) {
+    console.log(number);  // [1, 1, 1]
+}
+```
+With spread operator.
 ```js
 import {replicate} from 'iterize';
 
 [...replicate(5, 0)]   // [0, 0, 0, 0, 0]
 [...replicate(5, 'a')] // ['a', 'a', 'a', 'a', 'a']
 ```
-
-```js
-import {replicate} from 'iterize';
-
-let result = [];
-for (let number of replicate(3, 0)) {
-    result.push(number);
-}
-console.log(result);  // [0, 0, 0]
-```
-
 ```js
 import {replicate, range} from 'iterize';
 
@@ -186,27 +192,24 @@ Returns the first N items of the iterator sequentially.
 #### Interface
 
 ```typescript
-take(count: Number, iter: Iterator): Iterator
+take(count: number, iter: Iterator): Iterator
 ```
 
 #### Example
+```js
+import {take, cycle} from 'iterize';
 
+const cycleIterator = cycle([1, 2, 3]);
+for (let number of take(5, cycleIterator)) {
+    console.log(number);  // 1, 2, 3, 1, 2
+}
+```
+With spread operator.
 ```js
 import {take, cycle} from 'iterize';
 
 const cycleIterator = cycle([1, 2, 3]);
 [...take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
-```
-
-```js
-import {take, cycle} from 'iterize';
-
-const cycleIterator = cycle([1, 2, 3]);
-let result = [];
-for (let number of take(2, cycleIterator)) {
-    result.push(number);
-}
-console.log(result);  // [1, 2]
 ```
 
 # CONTRIBUTING
