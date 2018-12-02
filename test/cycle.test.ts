@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import { range, cycle } from '../src';
 import { iterResult } from './utility';
+import repeat from '../src/repeat';
+import replicate from '../src/replicate';
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
@@ -78,12 +80,18 @@ describe('Test Cycle API', () => {
     });
 
     describe('Edge case', () => {
-        it('empty parameter', () => {
+        it('illegal input parameter', () => {
             // @ts-ignore
             expect(() => cycle(1).next()).to.throw();
             // @ts-ignore
             expect(() => cycle('a').next()).to.throw();
             expect(() => cycle([]).next()).to.throw();
+        });
+
+        it('illegal input repeatIterator', () => {
+            expect(() => cycle(cycle([1, 2, 3]))).to.throw();
+            expect(() => cycle(repeat(1))).to.throw();
+            expect(() => cycle(replicate(1, '1'))).to.throw();
         });
     });
 });
