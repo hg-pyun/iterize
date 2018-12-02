@@ -7,11 +7,7 @@ import {
 import { isIterator } from './commons/utility';
 
 function repeat(item: number | string | IterableProtocol): IterableProtocol {
-    if (
-        typeof item !== 'number' &&
-        typeof item !== 'string' &&
-        !isIterator(item)
-    ) {
+    if (validateInputTypes(item)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
@@ -22,6 +18,10 @@ function repeat(item: number | string | IterableProtocol): IterableProtocol {
         iterable = item;
     }
     return new RepeatIterator(iterable, -1);
+}
+
+function validateInputTypes(item: any) {
+    return typeof item !== 'number' && typeof item !== 'string' && !isIterator(item);
 }
 
 export default repeat;
