@@ -4,7 +4,7 @@ import {
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isIterator } from './commons/utility';
+import {isIterator, isRepeatIterator} from './commons/utility';
 
 function replicate(count: number, item: number | string | IterableProtocol) {
     if (validateInputTypes(count, item)) {
@@ -13,6 +13,10 @@ function replicate(count: number, item: number | string | IterableProtocol) {
 
     if (validateCountNumber(count)) {
         throw new ArgumentError('Replicate count must be larger than 1.');
+    }
+
+    if(isRepeatIterator(item as IterableProtocol)) {
+        throw new ArgumentError('Do not use infinite type iterator.');
     }
 
     let iterator: any = item;

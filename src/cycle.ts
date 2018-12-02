@@ -4,7 +4,7 @@ import {
     ArrayIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isIterator } from './commons/utility';
+import { isIterator, isRepeatIterator } from './commons/utility';
 
 function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
 
@@ -15,6 +15,9 @@ function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
     // todo refactoring
     if (Array.isArray(item) && (item as Array<any>).length === 0) {
         throw new ArgumentError('Array is empty.');
+    }
+    else if(isRepeatIterator(item as IterableProtocol)) {
+        throw new ArgumentError('Do not use infinite type iterator.');
     }
 
     let iterator: IterableProtocol;
