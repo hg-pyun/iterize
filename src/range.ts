@@ -27,8 +27,9 @@ function range(
     let stepFunction: any = step;
 
     if (typeof step === 'number') {
-        stepFunction = (value: any) => {
-            return value + step;
+        let stepValue: number = step;
+        stepFunction = (value: number) => {
+            return value + stepValue;
         };
     }
     return new RangeIterator(start, end, stepFunction);
