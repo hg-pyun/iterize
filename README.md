@@ -206,7 +206,7 @@ for (let number of take(5, cycleIterator)) {
     console.log(number);  // 1, 2, 3, 1, 2
 }
 ```
-With spread operator.
+With the spread operator.
 ```js
 import {take, cycle} from 'iterize';
 
