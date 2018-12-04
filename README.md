@@ -6,7 +6,7 @@
 
 > Use JavaScript Iterator, Easily 
 
-**iterize** is minimalistic creator for iterator. A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers.
+**iterize** is a minimalistic creator for the iterator. A great feature called Iterator was added into JavaScript. However, it's a strange concept for most of the front-end developers.
 **iterize** helps you create your code more easily and efficiently using the various attributes of the Iterable Protocol.
 
 ## Why Powerful?
