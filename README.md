@@ -72,7 +72,7 @@ for (let number of range(0, 5, 2)) {
     console.log(number);  // 0, 2, 4
 }
 ```
-With spread operator.
+With the spread operator.
 ```js
 import {range} from 'iterize';
 [...range(5)];  // [0, 1, 2, 3, 4]
