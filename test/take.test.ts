@@ -65,7 +65,7 @@ describe('Test Take API', () => {
     });
 
     describe('Edge case', () => {
-        it('incorrect input parameter', () => {
+        it('illegal input parameter', () => {
             // @ts-ignore
             expect(() => take(5, 5).next()).to.throw();
 

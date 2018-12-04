@@ -4,15 +4,15 @@ import {
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isIterator } from './commons/utility';
+import {isIterator, isRepeatIterator} from './commons/utility';
 
 function repeat(item: number | string | IterableProtocol): IterableProtocol {
-    if (
-        typeof item !== 'number' &&
-        typeof item !== 'string' &&
-        !isIterator(item)
-    ) {
+    if (validateInputTypes(item)) {
         throw new ArgumentError('Please check arguments type.');
+    }
+
+    if(isRepeatIterator(item as IterableProtocol)) {
+        throw new ArgumentError('Do not use infinite type iterator.');
     }
 
     let iterable: IterableProtocol;
@@ -22,6 +22,10 @@ function repeat(item: number | string | IterableProtocol): IterableProtocol {
         iterable = item;
     }
     return new RepeatIterator(iterable, -1);
+}
+
+function validateInputTypes(item: any) {
+    return typeof item !== 'number' && typeof item !== 'string' && !isIterator(item);
 }
 
 export default repeat;

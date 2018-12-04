@@ -1,10 +1,10 @@
 import { ArgumentError } from './commons/ErrorModels';
 import { isIterator } from './commons/utility';
 function* take(
-    count: Number,
+    count: number,
     iter: IterableIterator<any>
 ): IterableIterator<any> {
-    if (typeof count !== 'number' || !isIterator(iter)) {
+    if (validateInputTypes(count, iter)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
@@ -14,6 +14,10 @@ function* take(
     }
 
     return;
+}
+
+function validateInputTypes(count:number, iter: any) {
+    return typeof count !== 'number' || !isIterator(iter)
 }
 
 export default take;
