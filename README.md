@@ -173,7 +173,7 @@ for (let number of replicate(3, 1)) {
     console.log(number);  // [1, 1, 1]
 }
 ```
-With spread operator.
+With the spread operator.
 ```js
 import {replicate} from 'iterize';
 
