@@ -107,7 +107,7 @@ iter.next(); // { value: 1, done: false }
 iter.next(); // { value: 2, done: false }
 ...
 ```
-`Cycle` can also receive range iterator.
+`Cycle` can also receive a range iterator.
 ```js
 import {cycle, range} from 'iterize';
 
