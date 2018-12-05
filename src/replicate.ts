@@ -6,7 +6,7 @@ import {
 } from './commons/Iterators';
 import {isIterator, isRepeatIterator} from './commons/utility';
 
-function replicate(count: number, item: number | string | IterableProtocol) {
+function replicate(count: number, item: number | string | Function | IterableProtocol) {
     if (validateInputTypes(count, item)) {
         throw new ArgumentError('Please check arguments type.');
     }
@@ -28,7 +28,7 @@ function replicate(count: number, item: number | string | IterableProtocol) {
 }
 
 function validateInputTypes(count:number, item: any) {
-    return typeof count !== 'number' || (typeof item !== 'number' && typeof item !== 'string' && !isIterator(item));
+    return typeof count !== 'number' || (typeof item !== 'number' && typeof item !== 'string' && typeof item !== 'function' && !isIterator(item));
 }
 
 function validateCountNumber(count:number) {
