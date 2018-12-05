@@ -15,13 +15,13 @@ function repeat(item: number | string | IterableProtocol): IterableProtocol {
         throw new ArgumentError('Do not use infinite type iterator.');
     }
 
-    let iterable: IterableProtocol;
-    if (typeof item === 'number' || typeof item === 'string') {
-        iterable = new PrimitiveIterator(item);
+    let iterator: IterableProtocol;
+    if (!isIterator(item)) {
+        iterator = new PrimitiveIterator(item);
     } else {
-        iterable = item;
+        iterator = item;
     }
-    return new RepeatIterator(iterable, -1);
+    return new RepeatIterator(iterator, -1);
 }
 
 function validateInputTypes(item: any) {

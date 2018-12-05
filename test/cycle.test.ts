@@ -1,5 +1,5 @@
-import { expect } from 'chai';
-import { range, cycle } from '../src';
+import { assert, expect } from 'chai';
+import { cycle, range } from '../src';
 import { iterResult } from './utility';
 import repeat from '../src/repeat';
 import replicate from '../src/replicate';
@@ -26,7 +26,26 @@ describe('Test Cycle API', () => {
             expect(iter.next()).to.deep.equal(iterResult('c'));
         });
 
-        it('generator type [0, 1, 2, 3, 4] ', () => {
+        it('function Type', () => {
+            const iter = cycle([
+                () => {
+                    return 1;
+                },
+                () => {
+                    return 2;
+                },
+                () => {
+                    return 3;
+                },
+            ]);
+
+            // Check iter.next().value equals function.
+            for (let i = 0; i < 5; i++) {
+                assert.isFunction(iter.next().value);
+            }
+        });
+
+        it('iterator type [0, 1, 2, 3, 4] ', () => {
             const rangeIterator = range(0, 5, 1);
             const iter = cycle(rangeIterator);
             expect(iter.next()).to.deep.equal(iterResult(0));
@@ -38,7 +57,7 @@ describe('Test Cycle API', () => {
             expect(iter.next()).to.deep.equal(iterResult(1));
         });
 
-        it('generator type [0, 2, 4] ', () => {
+        it('iterator type [0, 2, 4] ', () => {
             const rangeIterator = range(0, 5, 2);
             const iter = cycle(rangeIterator);
             expect(iter.next()).to.deep.equal(iterResult(0));

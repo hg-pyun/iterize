@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import { replicate, range, cycle, repeat } from '../src';
 import { iterResult, iterDone } from './utility';
 
@@ -24,7 +24,18 @@ describe('Test Replicate API', () => {
             expect(iter.next()).to.deep.equal(iterDone());
         });
 
-        it('generator type', () => {
+        it('function Type', () => {
+            const iter = replicate(5, () => {
+                return 1;
+            });
+
+            // Check iter.next().value equals function.
+            for (let i = 0; i < 5; i++) {
+                assert.isFunction(iter.next().value);
+            }
+        });
+
+        it('iterator type', () => {
             const rangeIterator = range(1, 5, 1);
             const iter = replicate(2, rangeIterator);
 
@@ -67,8 +78,6 @@ describe('Test Replicate API', () => {
         it('illegal input parameter', () => {
             // @ts-ignore
             expect(() => replicate(5, ['a']).next()).to.throw();
-            // @ts-ignore
-            expect(() => replicate(5, () => 1).next()).to.throw();
             // @ts-ignore
             expect(() => replicate('a', 10).next()).to.throw();
         });
