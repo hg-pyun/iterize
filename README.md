@@ -6,7 +6,7 @@
 
 > Use JavaScript Iterator, Easily 
 
-**iterize** is minimalistic creator for iterator. A great feature called Iterator was added into JavaScript. However, it's a strange concept to most of the front-end developers.
+**iterize** is a minimalistic creator for the iterator. A great feature called Iterator was added into JavaScript. However, it's a strange concept for most of the front-end developers.
 **iterize** helps you create your code more easily and efficiently using the various attributes of the Iterable Protocol.
 
 ## Why Powerful?
@@ -72,10 +72,12 @@ for (let number of range(0, 5, 2)) {
     console.log(number);  // 0, 2, 4
 }
 ```
-With spread operator.
+With the spread operator.
 ```js
 import {range} from 'iterize';
-
+[...range(5)];  // [0, 1, 2, 3, 4]
+[...range(0, 5)]; // [0, 1, 2, 3, 4]
+[...range(5, 0)]; // [5, 4, 3, 2, 1]
 [...range(1, 10, 1)]; // [1, 2, 3 ... 9]
 [...range(1, 10, x => x + 1)]; // [1, 2, 3 ... 9]
 [...range(2, 64, x => x * x)]; // [2, 4, 16]
@@ -105,7 +107,7 @@ iter.next(); // { value: 1, done: false }
 iter.next(); // { value: 2, done: false }
 ...
 ```
-`Cycle` can also receive range iterator.
+`Cycle` can also receive a range iterator.
 ```js
 import {cycle, range} from 'iterize';
 
@@ -171,7 +173,7 @@ for (let number of replicate(3, 1)) {
     console.log(number);  // [1, 1, 1]
 }
 ```
-With spread operator.
+With the spread operator.
 ```js
 import {replicate} from 'iterize';
 
@@ -204,7 +206,7 @@ for (let number of take(5, cycleIterator)) {
     console.log(number);  // 1, 2, 3, 1, 2
 }
 ```
-With spread operator.
+With the spread operator.
 ```js
 import {take, cycle} from 'iterize';
 

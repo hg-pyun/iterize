@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
-import { range, replicate } from '../src';
-import { iterDone, iterResult } from './utility';
+import { replicate, range, cycle, repeat } from '../src';
+import { iterResult, iterDone } from './utility';
 
 describe('Test Replicate API', () => {
     describe('Default case', () => {
@@ -75,11 +75,19 @@ describe('Test Replicate API', () => {
     });
 
     describe('Edge case', () => {
-        it('incorrect input parameter', () => {
+        it('illegal input parameter', () => {
             // @ts-ignore
             expect(() => replicate(5, ['a']).next()).to.throw();
             // @ts-ignore
             expect(() => replicate('a', 10).next()).to.throw();
+        });
+
+        it('illegal input repeatIterator', () => {
+            expect(() => replicate(3, cycle([1, 2, 3]))).to.throw();
+            expect(() => replicate(3, repeat(1))).to.throw();
+            expect(() =>
+                replicate(3, replicate(1, 10)).next()
+            ).to.throw();
         });
     });
 });
