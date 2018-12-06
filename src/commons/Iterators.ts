@@ -1,4 +1,4 @@
-import { IllegalIteratorBehaviorError } from './ErrorModels';
+import { BehaviorError } from './ErrorModels';
 
 export interface IterableProtocol extends IterableIterator<any> {
     // this method should clone the initial state of iterator
@@ -6,10 +6,10 @@ export interface IterableProtocol extends IterableIterator<any> {
 }
 
 export class PrimitiveIterator implements IterableProtocol {
-    value: number | string;
+    value: number | string | Function;
     done: boolean = false;
 
-    constructor(value: number | string) {
+    constructor(value: number | string | Function) {
         this.value = value;
     }
 
@@ -86,9 +86,7 @@ export class RepeatIterator implements IterableProtocol {
         this.iterator = this.iterator.clone();
         next = this.iterator.next();
         if (next.done) {
-            throw new IllegalIteratorBehaviorError(
-                'iterator should iterable more than once'
-            );
+            throw new BehaviorError('Iterator should iterable more than once.');
         }
         this.repeatCount++;
         return next;

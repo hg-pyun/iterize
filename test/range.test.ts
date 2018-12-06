@@ -1,90 +1,124 @@
 import { expect } from 'chai';
 import { range } from '../src';
+import { iterResult, iterDone } from './utility';
+
+function increaseTester(start: number, end: number, step: any, iter: any) {
+    let stepFunc = step;
+    if (typeof step === 'number') {
+        stepFunc = function(value: number) {
+            return step + value;
+        };
+    }
+
+    let cIter;
+    for (let i = start; i < end; i = stepFunc(cIter.value)) {
+        cIter = iter.next();
+        expect(cIter).to.deep.equal(iterResult(i));
+    }
+    cIter = iter.next();
+    expect(cIter).to.deep.equal(iterDone());
+}
+
+function decreaseTester(start: number, end: number, step: any, iter: any) {
+    let stepFunc = step;
+    if (typeof step === 'number') {
+        stepFunc = function(value: number) {
+            return step + value;
+        };
+    }
+
+    let cIter;
+    for (let i = start; i > end; i = stepFunc(cIter.value)) {
+        cIter = iter.next();
+        expect(cIter).to.deep.equal(iterResult(i));
+    }
+
+    cIter = iter.next();
+    expect(cIter).to.deep.equal(iterDone());
+}
 
 describe('Test Range API', () => {
     describe('Default case: Step is number type', () => {
-        it('increase number 1', () => {
-            const iter = range(0, 5, 1);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+        it('increase number', () => {
+            const start = 0;
+            const end = 5;
+            const increaseNumberOne = range(start, end, 1);
+            const increaseNumberTwo = range(start, end, 2);
+            const increaseNumberFour = range(start, end, 4);
+            increaseTester(start, end, 1, increaseNumberOne);
+            increaseTester(start, end, 2, increaseNumberTwo);
+            increaseTester(start, end, 4, increaseNumberFour);
         });
 
-        it('increase number 2', () => {
-            const iter = range(0, 5, 2);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
-        });
-
-        it('increase number 5', () => {
-            const iter = range(0, 5, 4);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
-        });
-
-        it('decrease number 1', () => {
-            const iter = range(5, 0, -1);
-            expect(iter.next()).to.deep.equal({ value: 5, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
-        });
-
-        it('decrease number 2', () => {
-            const iter = range(5, 0, -2);
-            expect(iter.next()).to.deep.equal({ value: 5, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
-        });
-
-        it('decrease number 5', () => {
-            const iter = range(5, 0, -4);
-            expect(iter.next()).to.deep.equal({ value: 5, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+        it('decrease number ', () => {
+            const start = 5;
+            const end = 0;
+            const decreaseNumberOne = range(start, end, -1);
+            const decreaseNumberTwo = range(start, end, -2);
+            const decreaseNumberFour = range(start, end, -4);
+            decreaseTester(start, end, -1, decreaseNumberOne);
+            decreaseTester(start, end, -2, decreaseNumberTwo);
+            decreaseTester(start, end, -4, decreaseNumberFour);
         });
     });
 
-    describe('Default case: Step is Function type', () => {
-        it('increase number 1', () => {
-            const iter = range(0, 5, (x: number) => x + 1);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+    describe('Default case: Step is function type', () => {
+        it('increase number', () => {
+            const start = 0;
+            const end = 5;
+            const increaseNumberOne = range(start, end, (x: number) => x + 1);
+            const increaseNumberTwo = range(start, end, (x: number) => x + 2);
+            const increaseNumberFour = range(start, end, (x: number) => x + 4);
+            increaseTester(start, end, (x: number) => x + 1, increaseNumberOne);
+            increaseTester(start, end, (x: number) => x + 2, increaseNumberTwo);
+            increaseTester(
+                start,
+                end,
+                (x: number) => x + 4,
+                increaseNumberFour
+            );
         });
 
-        it('decrease number 1', () => {
-            const iter = range(5, 0, (x: number) => x - 1);
-            expect(iter.next()).to.deep.equal({ value: 5, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 3, done: false });
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 1, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+        it('decrease number', () => {
+            const start = 5;
+            const end = 0;
+            const decreaseNumberOne = range(start, end, (x: number) => x - 1);
+            const decreaseNumberTwo = range(start, end, (x: number) => x - 2);
+            const decreaseNumberFour = range(start, end, (x: number) => x - 4);
+            decreaseTester(start, end, (x: number) => x - 1, decreaseNumberOne);
+            decreaseTester(start, end, (x: number) => x - 2, decreaseNumberTwo);
+            decreaseTester(
+                start,
+                end,
+                (x: number) => x - 4,
+                decreaseNumberFour
+            );
         });
 
         it('square x^2', () => {
             const iter = range(2, 64, (x: number) => x * x);
-            expect(iter.next()).to.deep.equal({ value: 2, done: false });
-            expect(iter.next()).to.deep.equal({ value: 4, done: false });
-            expect(iter.next()).to.deep.equal({ value: 16, done: false });
-            expect(iter.next()).to.deep.equal({ value: undefined, done: true });
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterResult(4));
+            expect(iter.next()).to.deep.equal(iterResult(16));
+            expect(iter.next()).to.deep.equal(iterDone());
         });
     });
 
-    describe('Default case: Compatability with language specifications', () => {
+    describe('Default case: overloading', () => {
+        it('one parameter', () => {
+            const increaseNumberOne = range(5);
+            increaseTester(0, 5, 1, increaseNumberOne);
+        });
+
+        it('two parameter', () => {
+            const increaseNumberOne = range(0, 5);
+            const decreaseNumberOne = range(5, 0);
+            increaseTester(0, 5, 1, increaseNumberOne);
+            decreaseTester(5, 0, -1, decreaseNumberOne);
+        });
+    });
+
+    describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             let number = 0;
             for (let n of range(0, 2, 1)) {
@@ -100,40 +134,18 @@ describe('Test Range API', () => {
     });
 
     describe('Edge case', () => {
-        it('incorrect input parameter', () => {
+        it('illegal input parameter', () => {
             // @ts-ignore
-            expect(() => range('a', 2, 3).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
+            expect(() => range('a', 2, 3).next()).to.throw();
             // @ts-ignore
-            expect(() => range(1, 'b', 3).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
+            expect(() => range(1, 'b', 3).next()).to.throw();
             // @ts-ignore
-            expect(() => range(1, 2, '1').next()).to.throw(
-                'Input parameter type is wrong.'
-            );
+            expect(() => range(1, 2, '1').next()).to.throw();
         });
 
         it('start === end', () => {
-            expect(() => range(1, 1, 3).next()).to.throw(
-                'The start and end parameter is same.'
-            );
-        });
-    });
-
-    describe('Default case: Compatability with language specifications', () => {
-        it('for - of', () => {
-            let number = 0;
-            for (let n of range(0, 2, 1)) {
-                expect(n).equal(number++);
-            }
-            expect(number).equal(2);
-        });
-
-        it('[...iterator]', () => {
-            let numbers = [...range(0, 2, 1)];
-            expect(numbers).to.deep.equal([0, 1]);
+            expect(() => range(1, 1).next()).to.throw();
+            expect(() => range(1, 1, 3).next()).to.throw();
         });
     });
 });

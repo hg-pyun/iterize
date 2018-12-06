@@ -1,23 +1,22 @@
-import { InputTypeError, IllegalArgumentError } from './commons/ErrorModels';
+import { ArgumentError } from './commons/ErrorModels';
 import {
     IterableProtocol,
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import { isIterator } from './commons/utility';
+import {isIterator, isRepeatIterator} from './commons/utility';
 
-function replicate(count: number, item: number | string | IterableProtocol) {
-    if (
-        typeof count !== 'number' ||
-        (typeof item !== 'number' &&
-            typeof item !== 'string' &&
-            !isIterator(item))
-    ) {
-        throw new InputTypeError();
+function replicate(count: number, item: number | string | Function | IterableProtocol) {
+    if (validateInputTypes(count, item)) {
+        throw new ArgumentError('Please check arguments type.');
     }
 
-    if (count < 1) {
-        throw new IllegalArgumentError('replicate count must be larger than 1');
+    if (validateCountNumber(count)) {
+        throw new ArgumentError('Replicate count must be larger than 1.');
+    }
+
+    if(isRepeatIterator(item as IterableProtocol)) {
+        throw new ArgumentError('Do not use infinite type iterator.');
     }
 
     let iterator: any = item;
@@ -27,5 +26,14 @@ function replicate(count: number, item: number | string | IterableProtocol) {
 
     return new RepeatIterator(iterator, count);
 }
+
+function validateInputTypes(count:number, item: any) {
+    return typeof count !== 'number' || (typeof item !== 'number' && typeof item !== 'string' && typeof item !== 'function' && !isIterator(item));
+}
+
+function validateCountNumber(count:number) {
+    return count < 1;
+}
+
 
 export default replicate;

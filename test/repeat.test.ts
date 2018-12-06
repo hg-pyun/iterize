@@ -1,41 +1,36 @@
-import { expect } from 'chai';
-import { repeat } from '../src';
+import { assert, expect } from 'chai';
+import { repeat, cycle, replicate } from '../src';
+import { iterResult } from './utility';
 
 describe('Test Repeat API', () => {
     describe('Default case', () => {
         it('number type', () => {
             const iter = repeat(0);
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
-            expect(iter.next()).to.deep.equal({ value: 0, done: false });
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(0));
         });
 
         it('string type', () => {
             const iter = repeat('a');
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
-            expect(iter.next()).to.deep.equal({ value: 'a', done: false });
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+            expect(iter.next()).to.deep.equal(iterResult('a'));
+        });
+
+        it('function Type', () => {
+            const iter = repeat(() => {
+                return 1;
+            });
+
+            // Check iter.next().value equals function.
+            for (let i = 0; i < 5; i++) {
+                assert.isFunction(iter.next().value);
+            }
         });
     });
 
-    describe('Edge case', () => {
-        it('incorrect input parameter', () => {
-            // @ts-ignore
-            expect(() => repeat(['a']).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-            // @ts-ignore
-            expect(() => repeat(() => 1).next()).to.throw(
-                'Input parameter type is wrong.'
-            );
-        });
-    });
-
-    describe('Default case: Compatability with language specifications', () => {
+    describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             let count = 0;
             for (let n of repeat('a')) {
@@ -45,6 +40,19 @@ describe('Test Repeat API', () => {
                 expect(n).equal('a');
                 count++;
             }
+        });
+    });
+
+    describe('Edge case', () => {
+        it('illegal input parameter', () => {
+            // @ts-ignore
+            expect(() => repeat(['a']).next()).to.throw();
+        });
+
+        it('illegal input repeatIterator', () => {
+            expect(() => repeat(cycle([1, 2, 3])).next()).to.throw();
+            expect(() => repeat(repeat(1)).next()).to.throw();
+            expect(() => repeat(replicate(3, '1')).next()).to.throw();
         });
     });
 });
