@@ -42,7 +42,6 @@ import {range} from 'iterize';
 - [Range](https://github.com/hg-pyun/iterize#range)
 - [Cycle](https://github.com/hg-pyun/iterize#cycle)
 - [Repeat](https://github.com/hg-pyun/iterize#repeat)
-- [Replicate](https://github.com/hg-pyun/iterize#replicate)
 - [Take](https://github.com/hg-pyun/iterize#take)
 
 ## Range
@@ -52,7 +51,7 @@ Returns a transmitter that increases with some steps within a certain range.
 #### Interface
 
 ```typescript
-range(start: number, end?:number, step?: number | Function): Iterator
+range(start: number, end?: number, step?: number | Function): Iterator
 ```
 
 #### Example
@@ -124,67 +123,34 @@ iter.next(); // { value: 0, done: false }
 ```
 
 ## Repeat
-
-Returns a number or a string infinitely.
-
-#### Interface
-
-```typescript
-repeat(item: number | string| Function): Iterator
-```
-
-#### Example
-
-```js
-import {repeat} from 'iterize';
-
-const iter = repeat(0);
-iter.next(); // { value: 0, done: false }
-iter.next(); // { value: 0, done: false }
-iter.next(); // { value: 0, done: false }
-...
-```
-
-```js
-import {repeat} from 'iterize';
-
-const iter = repeat('a');
-iter.next(); // { value: 'a', done: false }
-iter.next(); // { value: 'a', done: false }
-iter.next(); // { value: 'a', done: false }
-...
-```
-
-## Replicate
-
 Returns the N copies of the input(number, string, or iterator).
 
 #### Interface
 
 ```typescript
-replicate(count: number, item: number | string | Function | Iterator): Iterator
+repeat(item: number | string | Function | Iterator, count: number): Iterator
 ```
 
 #### Example
 ```js
-import {replicate} from 'iterize';
+import {repeat} from 'iterize';
 
-for (let number of replicate(3, 1)) {
+for (let number of repeat(1, 3)) {
     console.log(number);  // [1, 1, 1]
 }
 ```
 With the spread operator.
 ```js
-import {replicate} from 'iterize';
+import {repeat} from 'iterize';
 
-[...replicate(5, 0)]   // [0, 0, 0, 0, 0]
-[...replicate(5, 'a')] // ['a', 'a', 'a', 'a', 'a']
+[...repeat(0, 5)];   // [0, 0, 0, 0, 0]
+[...repeat('a', 5)]; // ['a', 'a', 'a', 'a', 'a']
 ```
 ```js
-import {replicate, range} from 'iterize';
+import {repeat, range} from 'iterize';
 
 const rangeIterator = range(1, 5, 1);
-[...replicate(2, rangeIterator)]; // [1, 2, 3, 4, 1, 2, 3, 4]
+[...repeat(rangeIterator, 2)]; // [1, 2, 3, 4, 1, 2, 3, 4]
 ```
 
 ## Take
