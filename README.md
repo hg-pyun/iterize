@@ -87,13 +87,25 @@ import {range} from 'iterize';
 
 #### Interface
 
-Receives an array or an iterator and returns an emitter that repeats infinitely.
+Receives a string, an array or an iterator and returns an emitter that repeats infinitely.
 
 ```typescript
-cycle(item: Array<any> | Iterator): Iterator
+cycle(item: string | Array<any> | Iterator): Iterator
 ```
 
 #### Example
+```js
+import {cycle} from 'iterize';
+
+const iter = cycle('ABCD');
+iter.next(); // { value: 'A', done: false }
+iter.next(); // { value: 'B', done: false }
+iter.next(); // { value: 'C', done: false }
+iter.next(); // { value: 'D', done: false }
+iter.next(); // { value: 'A', done: false }
+iter.next(); // { value: 'B', done: false }
+...
+```
 
 ```js
 import {cycle} from 'iterize';
