@@ -6,7 +6,18 @@ import replicate from '../src/replicate';
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
-        it('array type [0, 1, 2]', () => {
+
+        it('string type', () => {
+            const iter = cycle('ABCD');
+            expect(iter.next()).to.deep.equal(iterResult('A'));
+            expect(iter.next()).to.deep.equal(iterResult('B'));
+            expect(iter.next()).to.deep.equal(iterResult('C'));
+            expect(iter.next()).to.deep.equal(iterResult('D'));
+            expect(iter.next()).to.deep.equal(iterResult('A'));
+            expect(iter.next()).to.deep.equal(iterResult('B'));
+        });
+
+        it('array type (integer)', () => {
             const iter = cycle([0, 1, 2]);
             expect(iter.next()).to.deep.equal(iterResult(0));
             expect(iter.next()).to.deep.equal(iterResult(1));
@@ -16,7 +27,7 @@ describe('Test Cycle API', () => {
             expect(iter.next()).to.deep.equal(iterResult(2));
         });
 
-        it("array type ['a', 'b', 'c']", () => {
+        it("array type (string)", () => {
             const iter = cycle(['a', 'b', 'c']);
             expect(iter.next()).to.deep.equal(iterResult('a'));
             expect(iter.next()).to.deep.equal(iterResult('b'));
@@ -103,7 +114,6 @@ describe('Test Cycle API', () => {
             // @ts-ignore
             expect(() => cycle(1).next()).to.throw();
             // @ts-ignore
-            expect(() => cycle('a').next()).to.throw();
             expect(() => cycle([]).next()).to.throw();
         });
 
