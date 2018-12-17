@@ -189,8 +189,8 @@ With the spread operator.
 ```js
 import {replicate} from 'iterize';
 
-[...replicate(5, 0)]   // [0, 0, 0, 0, 0]
-[...replicate(5, 'a')] // ['a', 'a', 'a', 'a', 'a']
+[...replicate(5, 0)];   // [0, 0, 0, 0, 0]
+[...replicate(5, 'a')]; // ['a', 'a', 'a', 'a', 'a']
 ```
 ```js
 import {replicate, range} from 'iterize';
@@ -206,7 +206,7 @@ Returns the first N items of the iterator sequentially.
 #### Interface
 
 ```typescript
-take(count: number, iter: Iterator): Iterator
+take(taker: number | Function, iter: Iterator): Iterator
 ```
 
 #### Example
@@ -216,6 +216,13 @@ import {take, cycle} from 'iterize';
 const cycleIterator = cycle([1, 2, 3]);
 for (let number of take(5, cycleIterator)) {
     console.log(number);  // 1, 2, 3, 1, 2
+}
+```
+```js
+import {take, range} from 'iterize';
+
+for (let number of take(x => x < 3, range(5))) {
+    console.log(number);  // 0, 1, 2
 }
 ```
 With the spread operator.
