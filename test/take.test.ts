@@ -45,6 +45,26 @@ describe('Test Take API', () => {
         });
     });
 
+    describe('takewhile', () => {
+        it('range type', () => {
+            const rangeIterator = range(5);
+            const iter = take((x: any) => x < 3, rangeIterator);
+            expect(iter.next()).to.deep.equal(iterResult(0));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(2));
+            expect(iter.next()).to.deep.equal(iterDone());
+        });
+
+        it('cycle type', () => {
+            const cycleIterator = cycle([1, 2, 3]);
+            const iter = take((x: any) => x === 1, cycleIterator);
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+            expect(iter.next()).to.deep.equal(iterResult(1));
+        });
+    });
+
     describe('Default case: Compatibility with language specifications', () => {
         it('for - of', () => {
             const cycleIterator = cycle([1, 2, 3]);
@@ -69,9 +89,8 @@ describe('Test Take API', () => {
             // @ts-ignore
             expect(() => take(5, 5).next()).to.throw();
 
-            const cycleIterator = cycle([1, 2, 3]);
             // @ts-ignore
-            expect(() => take('a', cycleIterator).next()).to.throw();
+            expect(() => take('a', cycle([1, 2, 3])).next()).to.throw();
         });
     });
 });
