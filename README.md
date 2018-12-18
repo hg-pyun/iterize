@@ -86,13 +86,25 @@ import {range} from 'iterize';
 
 #### Interface
 
-Receives an array or an iterator and returns an emitter that repeats infinitely.
+Receives a string, an array or an iterator and returns an emitter that repeats infinitely.
 
 ```typescript
-cycle(item: Array<any> | Iterator): Iterator
+cycle(item: string | Array<any> | Iterator): Iterator
 ```
 
 #### Example
+```js
+import {cycle} from 'iterize';
+
+const iter = cycle('ABCD');
+iter.next(); // { value: 'A', done: false }
+iter.next(); // { value: 'B', done: false }
+iter.next(); // { value: 'C', done: false }
+iter.next(); // { value: 'D', done: false }
+iter.next(); // { value: 'A', done: false }
+iter.next(); // { value: 'B', done: false }
+...
+```
 
 ```js
 import {cycle} from 'iterize';
@@ -160,7 +172,7 @@ Returns the first N items of the iterator sequentially.
 #### Interface
 
 ```typescript
-take(count: number, iter: Iterator): Iterator
+take(taker: number | Function, iter: Iterator): Iterator
 ```
 
 #### Example
@@ -170,6 +182,13 @@ import {take, cycle} from 'iterize';
 const cycleIterator = cycle([1, 2, 3]);
 for (let number of take(5, cycleIterator)) {
     console.log(number);  // 1, 2, 3, 1, 2
+}
+```
+```js
+import {take, range} from 'iterize';
+
+for (let number of take(x => x < 3, range(5))) {
+    console.log(number);  // 0, 1, 2
 }
 ```
 With the spread operator.

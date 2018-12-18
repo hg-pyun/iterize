@@ -6,7 +6,7 @@ import {
 } from './commons/Iterators';
 import { isIterator, isRepeatIterator } from './commons/utility';
 
-function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
+function cycle(item: string | Array<any> | IterableProtocol): IterableProtocol {
 
     if (validateInputTypes(item)) {
         throw new ArgumentError('Please check arguments type.');
@@ -23,7 +23,11 @@ function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
     let iterator: IterableProtocol;
     if (Array.isArray(item)) {
         iterator = new ArrayIterator(item);
-    } else {
+    }
+    else if(typeof item === 'string') {
+        iterator = new ArrayIterator(item.split(''));
+    }
+    else {
         iterator = item;
     }
 
@@ -31,7 +35,7 @@ function cycle(item: Array<any> | IterableProtocol): IterableProtocol {
 }
 
 function validateInputTypes(item: any) {
-    return !Array.isArray(item) && !isIterator(item);
+    return typeof item !== 'string' && !Array.isArray(item) && !isIterator(item);
 }
 
 export default cycle;

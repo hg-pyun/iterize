@@ -1,23 +1,39 @@
 import { ArgumentError } from './commons/ErrorModels';
 import { isIterator } from './commons/utility';
-function* take(
-    count: number,
-    iter: IterableIterator<any>
-): IterableIterator<any> {
-    if (validateInputTypes(count, iter)) {
+import { IterableProtocol } from './commons/Iterators';
+
+function* take(taker: number | Function, iter: IterableProtocol) {
+    if (validateInputTypes(taker, iter)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
-    let index = 0;
-    while (index++ < count) {
-        yield iter.next().value;
+    if (typeof taker === 'number') {
+        let index = 0;
+        while (index++ < taker) {
+            yield iter.next().value;
+        }
+    } else {
+        while (true) {
+            const result = iter.next();
+
+            if (result.done) {
+                break;
+            }
+
+            if (taker(result.value)) {
+                yield result.value;
+            }
+        }
     }
 
     return;
 }
 
-function validateInputTypes(count:number, iter: any) {
-    return typeof count !== 'number' || !isIterator(iter)
+function validateInputTypes(taker: number | Function, iter: IterableProtocol) {
+    return (
+        (typeof taker !== 'number' && typeof taker !== 'function') ||
+        !isIterator(iter)
+    );
 }
 
 export default take;
