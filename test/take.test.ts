@@ -1,8 +1,6 @@
 import { expect } from 'chai';
-import { range, take, cycle } from '../src';
+import { range, take, cycle, repeat } from '../src';
 import { iterDone, iterResult } from './utility';
-import repeat from '../src/repeat';
-import replicate from '../src/replicate';
 
 describe('Test Take API', () => {
     describe('Default case', () => {
@@ -26,20 +24,9 @@ describe('Test Take API', () => {
         });
 
         it('repeat type', () => {
-            const repeatIterator = repeat(0);
+            const repeatIterator = repeat(0, 2);
             const iter = take(2, repeatIterator);
             expect(iter.next()).to.deep.equal(iterResult(0));
-            expect(iter.next()).to.deep.equal(iterResult(0));
-            expect(iter.next()).to.deep.equal(iterDone());
-        });
-
-        it('replicate type', () => {
-            const rangeIterator = range(0, 5, 2);
-            const replicateIterator = replicate(2, rangeIterator);
-            const iter = take(4, replicateIterator);
-            expect(iter.next()).to.deep.equal(iterResult(0));
-            expect(iter.next()).to.deep.equal(iterResult(2));
-            expect(iter.next()).to.deep.equal(iterResult(4));
             expect(iter.next()).to.deep.equal(iterResult(0));
             expect(iter.next()).to.deep.equal(iterDone());
         });

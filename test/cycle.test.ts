@@ -2,7 +2,6 @@ import { assert, expect } from 'chai';
 import { cycle, range } from '../src';
 import { iterResult } from './utility';
 import repeat from '../src/repeat';
-import replicate from '../src/replicate';
 
 describe('Test Cycle API', () => {
     describe('Default case', () => {
@@ -119,8 +118,7 @@ describe('Test Cycle API', () => {
 
         it('illegal input repeatIterator', () => {
             expect(() => cycle(cycle([1, 2, 3]))).to.throw();
-            expect(() => cycle(repeat(1))).to.throw();
-            expect(() => cycle(replicate(1, '1'))).to.throw();
+            expect(() => cycle(repeat(1, 5))).to.throw();
         });
     });
 });
