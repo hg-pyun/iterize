@@ -6,12 +6,19 @@ import {
 } from './commons/Iterators';
 import {isIterator, isRepeatIterator} from './commons/utility';
 
-function repeat(item: number | string | Function | IterableProtocol): IterableProtocol {
-    if (validateInputTypes(item)) {
+function repeat(
+    item: number | string | Function | IterableProtocol,
+    count: number
+): IterableProtocol {
+    if (validateInputTypes(item, count)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
-    if(isRepeatIterator(item as IterableProtocol)) {
+    if (validateCountNumber(count)) {
+        throw new ArgumentError('Repeat count must be larger than 1.');
+    }
+
+    if (isRepeatIterator(item as IterableProtocol)) {
         throw new ArgumentError('Do not use infinite type iterator.');
     }
 
@@ -21,11 +28,22 @@ function repeat(item: number | string | Function | IterableProtocol): IterablePr
     } else {
         iterator = item;
     }
-    return new RepeatIterator(iterator, -1);
+    return new RepeatIterator(iterator, count);
 }
 
-function validateInputTypes(item: any) {
-    return typeof item !== 'number' && typeof item !== 'string' && typeof item !== 'function' && !isIterator(item);
+function validateInputTypes(item: any, count: number) {
+    return (
+        typeof count !== 'number' ||
+        (typeof item !== 'number' &&
+            typeof item !== 'string' &&
+            typeof item !== 'function' &&
+            !isIterator(item))
+    );
 }
+
+function validateCountNumber(count: number) {
+    return count < 1;
+}
+
 
 export default repeat;

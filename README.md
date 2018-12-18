@@ -42,7 +42,6 @@ import {range} from 'iterize';
 - [Range](https://github.com/hg-pyun/iterize#range)
 - [Cycle](https://github.com/hg-pyun/iterize#cycle)
 - [Repeat](https://github.com/hg-pyun/iterize#repeat)
-- [Replicate](https://github.com/hg-pyun/iterize#replicate)
 - [Take](https://github.com/hg-pyun/iterize#take)
 
 ## Range
@@ -52,7 +51,7 @@ Returns a transmitter that increases with some steps within a certain range.
 #### Interface
 
 ```typescript
-range(start: number, end?:number, step?: number | Function): Iterator
+range(start: number, end?: number, step?: number | Function): Iterator
 ```
 
 #### Example
@@ -87,13 +86,25 @@ import {range} from 'iterize';
 
 #### Interface
 
-Receives an array or an iterator and returns an emitter that repeats infinitely.
+Receives a string, an array or an iterator and returns an emitter that repeats infinitely.
 
 ```typescript
-cycle(item: Array<any> | Iterator): Iterator
+cycle(item: string | Array<any> | Iterator): Iterator
 ```
 
 #### Example
+```js
+import {cycle} from 'iterize';
+
+const iter = cycle('ABCD');
+iter.next(); // { value: 'A', done: false }
+iter.next(); // { value: 'B', done: false }
+iter.next(); // { value: 'C', done: false }
+iter.next(); // { value: 'D', done: false }
+iter.next(); // { value: 'A', done: false }
+iter.next(); // { value: 'B', done: false }
+...
+```
 
 ```js
 import {cycle} from 'iterize';
@@ -124,67 +135,34 @@ iter.next(); // { value: 0, done: false }
 ```
 
 ## Repeat
-
-Returns a number or a string infinitely.
-
-#### Interface
-
-```typescript
-repeat(item: number | string| Function): Iterator
-```
-
-#### Example
-
-```js
-import {repeat} from 'iterize';
-
-const iter = repeat(0);
-iter.next(); // { value: 0, done: false }
-iter.next(); // { value: 0, done: false }
-iter.next(); // { value: 0, done: false }
-...
-```
-
-```js
-import {repeat} from 'iterize';
-
-const iter = repeat('a');
-iter.next(); // { value: 'a', done: false }
-iter.next(); // { value: 'a', done: false }
-iter.next(); // { value: 'a', done: false }
-...
-```
-
-## Replicate
-
 Returns the N copies of the input(number, string, or iterator).
 
 #### Interface
 
 ```typescript
-replicate(count: number, item: number | string | Function | Iterator): Iterator
+repeat(item: number | string | Function | Iterator, count: number): Iterator
 ```
 
 #### Example
 ```js
-import {replicate} from 'iterize';
+import {repeat} from 'iterize';
 
-for (let number of replicate(3, 1)) {
+for (let number of repeat(1, 3)) {
     console.log(number);  // [1, 1, 1]
 }
 ```
 With the spread operator.
 ```js
-import {replicate} from 'iterize';
+import {repeat} from 'iterize';
 
-[...replicate(5, 0)]   // [0, 0, 0, 0, 0]
-[...replicate(5, 'a')] // ['a', 'a', 'a', 'a', 'a']
+[...repeat(0, 5)];   // [0, 0, 0, 0, 0]
+[...repeat('a', 5)]; // ['a', 'a', 'a', 'a', 'a']
 ```
 ```js
-import {replicate, range} from 'iterize';
+import {repeat, range} from 'iterize';
 
 const rangeIterator = range(1, 5, 1);
-[...replicate(2, rangeIterator)]; // [1, 2, 3, 4, 1, 2, 3, 4]
+[...repeat(rangeIterator, 2)]; // [1, 2, 3, 4, 1, 2, 3, 4]
 ```
 
 ## Take
@@ -194,7 +172,7 @@ Returns the first N items of the iterator sequentially.
 #### Interface
 
 ```typescript
-take(count: number, iter: Iterator): Iterator
+take(taker: number | Function, iter: Iterator): Iterator
 ```
 
 #### Example
@@ -204,6 +182,13 @@ import {take, cycle} from 'iterize';
 const cycleIterator = cycle([1, 2, 3]);
 for (let number of take(5, cycleIterator)) {
     console.log(number);  // 1, 2, 3, 1, 2
+}
+```
+```js
+import {take, range} from 'iterize';
+
+for (let number of take(x => x < 3, range(5))) {
+    console.log(number);  // 0, 1, 2
 }
 ```
 With the spread operator.
