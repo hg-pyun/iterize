@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/v/iterize.svg)](https://www.npmjs.com/package/iterize)
 [![npm](https://img.shields.io/npm/dt/iterize.svg)](https://www.npmjs.com/package/iterize)
 [![GitHub license](https://img.shields.io/github/license/hg-pyun/iterize.svg)](https://github.com/hg-pyun/iterize/blob/master/LICENSE)
+![Build Status](https://codebuild.ap-northeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoibC9MTUdiTUlIUkFGZzB3SThHMWc1WlI0N2I2TnhFT0RxcXozUVlrU1V6dk1iZzlyWHJvelRIMDJCMHowRE56cDc0N3NUcFIxQ0owSWlqektFR1JJaGI0PSIsIml2UGFyYW1ldGVyU3BlYyI6IkNnMUdYU01GTVpFbFpUNE0iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
 > Use JavaScript Iterator, Easily 
 
