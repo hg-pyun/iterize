@@ -1,5 +1,6 @@
 # iterize
 
+![Build Status](https://codebuild.ap-northeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiYktSbFJ4OWY5bTM2bmZMYllSemVPcHEvMGtYN0FZc0tGQkxnVm9FVjVyWnNPRjZPS216Y1R4Smw3YkpHWE1SNEVVVFhLaUtvanBEVWxMK29Bd2ZoNWNFPSIsIml2UGFyYW1ldGVyU3BlYyI6Inl1VUM3bGFQWjA4UDdLWXoiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 [![npm](https://img.shields.io/npm/v/iterize.svg)](https://www.npmjs.com/package/iterize)
 [![npm](https://img.shields.io/npm/dt/iterize.svg)](https://www.npmjs.com/package/iterize)
 [![GitHub license](https://img.shields.io/github/license/hg-pyun/iterize.svg)](https://github.com/hg-pyun/iterize/blob/master/LICENSE)
