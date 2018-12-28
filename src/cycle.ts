@@ -6,32 +6,32 @@ import {
 } from './commons/Iterators';
 import { isIterator, isRepeatIterator } from './commons/utility';
 
-function cycle (item: string | Array<any> | IterableProtocol): IterableProtocol {
-    if (validateInputTypes(item)) {
+function cycle (seq: string | Array<any> | IterableProtocol): IterableProtocol {
+    if (validateInputTypes(seq)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
     // todo refactoring
-    if (Array.isArray(item) && (item as Array<any>).length === 0) {
+    if (Array.isArray(seq) && (seq as Array<any>).length === 0) {
         throw new ArgumentError('Array is empty.');
-    } else if (isRepeatIterator(item as IterableProtocol)) {
+    } else if (isRepeatIterator(seq as IterableProtocol)) {
         throw new ArgumentError('Do not use infinite type iterator.');
     }
 
     let iterator: IterableProtocol;
-    if (Array.isArray(item)) {
-        iterator = new ArrayIterator(item);
-    } else if (typeof item === 'string') {
-        iterator = new ArrayIterator(item.split(''));
+    if (Array.isArray(seq)) {
+        iterator = new ArrayIterator(seq);
+    } else if (typeof seq === 'string') {
+        iterator = new ArrayIterator(seq.split(''));
     } else {
-        iterator = item;
+        iterator = seq;
     }
 
     return new RepeatIterator(iterator, RepeatIterator.FOREVER);
 }
 
-function validateInputTypes (item: any) {
-    return typeof item !== 'string' && !Array.isArray(item) && !isIterator(item);
+function validateInputTypes (seq: any) {
+    return typeof seq !== 'string' && !Array.isArray(seq) && !isIterator(seq);
 }
 
 export default cycle;
