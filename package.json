@@ -40,26 +40,24 @@
     "babel-preset-minify": "^0.5.0",
     "chai": "^4.2.0",
     "cross-env": "^5.2.0",
-    "husky": "^1.1.2",
-    "lint-staged": "^7.3.0",
+    "eslint": "^5.11.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "mocha": "^5.2.0",
-    "precise-commits": "^1.0.2",
-    "prettier": "1.14.3",
     "ts-node": "^7.0.1",
-    "typescript": "^3.1.1"
+    "typescript": "^3.1.1",
+    "typescript-eslint-parser": "^21.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "precise-commits"
-    }
   },
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel ./src --out-dir lib --extensions '.ts'",
     "test": "mocha --recursive ./test/*.ts --require ts-node/register",
     "deploy": "npm test && npm run build && npm publish",
-    "test:watch": "mocha --recursive --watch-extensions ts --watch ./test/*.ts --require ts-node/register"
+    "test:watch": "mocha --recursive --watch-extensions ts --watch ./test/*.ts --require ts-node/register",
+    "lint": "eslint src/**.ts --fix"
   }
 }
