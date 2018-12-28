@@ -1,6 +1,6 @@
-import { assert, expect } from 'chai';
-import { cycle, range } from '../src';
-import { iterResult } from './utility';
+import {assert, expect} from 'chai';
+import {cycle, range} from '../src';
+import {iterResult} from './utility';
 import repeat from '../src/repeat';
 
 describe('Test Cycle API', () => {

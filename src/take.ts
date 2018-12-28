@@ -2,7 +2,7 @@ import { ArgumentError } from './commons/ErrorModels';
 import { isIterator } from './commons/utility';
 import { IterableProtocol } from './commons/Iterators';
 
-function* take(taker: number | Function, iter: IterableProtocol) {
+function * take (taker: number | Function, iter: IterableProtocol) {
     if (validateInputTypes(taker, iter)) {
         throw new ArgumentError('Please check arguments type.');
     }
@@ -25,11 +25,9 @@ function* take(taker: number | Function, iter: IterableProtocol) {
             }
         }
     }
-
-    return;
 }
 
-function validateInputTypes(taker: number | Function, iter: IterableProtocol) {
+function validateInputTypes (taker: number | Function, iter: IterableProtocol) {
     return (
         (typeof taker !== 'number' && typeof taker !== 'function') ||
         !isIterator(iter)

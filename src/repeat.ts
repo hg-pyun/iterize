@@ -4,9 +4,9 @@ import {
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
-import {isIterator, isRepeatIterator} from './commons/utility';
+import { isIterator, isRepeatIterator } from './commons/utility';
 
-function repeat(
+function repeat (
     item: number | string | Function | IterableProtocol,
     count: number
 ): IterableProtocol {
@@ -31,7 +31,7 @@ function repeat(
     return new RepeatIterator(iterator, count);
 }
 
-function validateInputTypes(item: any, count: number) {
+function validateInputTypes (item: any, count: number) {
     return (
         typeof count !== 'number' ||
         (typeof item !== 'number' &&
@@ -41,9 +41,8 @@ function validateInputTypes(item: any, count: number) {
     );
 }
 
-function validateCountNumber(count: number) {
+function validateCountNumber (count: number) {
     return count < 1;
 }
-
 
 export default repeat;
