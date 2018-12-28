@@ -12,4 +12,4 @@ class BehaviorError extends Error {
     }
 }
 
-export { ArgumentError, BehaviorError };
+export {ArgumentError, BehaviorError};

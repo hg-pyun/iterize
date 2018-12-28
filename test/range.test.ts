@@ -1,11 +1,11 @@
-import { expect } from 'chai';
-import { range } from '../src';
-import { iterResult, iterDone } from './utility';
+import {expect} from 'chai';
+import {range} from '../src';
+import {iterResult, iterDone} from './utility';
 
 function increaseTester(start: number, end: number, step: any, iter: any) {
     let stepFunc = step;
     if (typeof step === 'number') {
-        stepFunc = function(value: number) {
+        stepFunc = function (value: number) {
             return step + value;
         };
     }
@@ -22,7 +22,7 @@ function increaseTester(start: number, end: number, step: any, iter: any) {
 function decreaseTester(start: number, end: number, step: any, iter: any) {
     let stepFunc = step;
     if (typeof step === 'number') {
-        stepFunc = function(value: number) {
+        stepFunc = function (value: number) {
             return step + value;
         };
     }

@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { range, take, cycle, repeat } from '../src';
-import { iterDone, iterResult } from './utility';
+import {expect} from 'chai';
+import {range, take, cycle, repeat} from '../src';
+import {iterDone, iterResult} from './utility';
 
 describe('Test Take API', () => {
     describe('Default case', () => {

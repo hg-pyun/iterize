@@ -1,4 +1,4 @@
-import { BehaviorError } from './ErrorModels';
+import {BehaviorError} from './ErrorModels';
 
 export interface IterableProtocol extends IterableIterator<any> {
     // this method should clone the initial state of iterator
@@ -19,10 +19,10 @@ export class PrimitiveIterator implements IterableProtocol {
 
     public next(value?: any): IteratorResult<any> {
         if (this.done) {
-            return { value: undefined, done: true };
+            return {value: undefined, done: true};
         }
         this.done = true;
-        return { value: this.value, done: false };
+        return {value: this.value, done: false};
     }
 
     public clone(): IterableProtocol {
@@ -80,7 +80,7 @@ export class RepeatIterator implements IterableProtocol {
             this.repeatLimit !== RepeatIterator.FOREVER &&
             !(this.repeatCount < this.repeatLimit)
         ) {
-            return { value: undefined, done: true };
+            return {value: undefined, done: true};
         }
 
         this.iterator = this.iterator.clone();
@@ -119,9 +119,9 @@ export class RangeIterator implements IterableProtocol {
         if (this.hasNext()) {
             let value = this.current;
             this.current = this.step(this.current);
-            return { value: value, done: false };
+            return {value: value, done: false};
         }
-        return { value: undefined, done: true };
+        return {value: undefined, done: true};
     }
 
     hasNext() {
