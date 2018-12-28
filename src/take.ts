@@ -2,14 +2,14 @@ import { ArgumentError } from './commons/ErrorModels';
 import { isIterator } from './commons/utility';
 import { IterableProtocol } from './commons/Iterators';
 
-function * take (taker: number | Function, iter: IterableProtocol) {
-    if (validateInputTypes(taker, iter)) {
+function * take (predicate: number | Function, iter: IterableProtocol) {
+    if (validateInputTypes(predicate, iter)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
-    if (typeof taker === 'number') {
+    if (typeof predicate === 'number') {
         let index = 0;
-        while (index++ < taker) {
+        while (index++ < predicate) {
             yield iter.next().value;
         }
     } else {
@@ -20,16 +20,16 @@ function * take (taker: number | Function, iter: IterableProtocol) {
                 break;
             }
 
-            if (taker(result.value)) {
+            if (predicate(result.value)) {
                 yield result.value;
             }
         }
     }
 }
 
-function validateInputTypes (taker: number | Function, iter: IterableProtocol) {
+function validateInputTypes (predicate: number | Function, iter: IterableProtocol) {
     return (
-        (typeof taker !== 'number' && typeof taker !== 'function') ||
+        (typeof predicate !== 'number' && typeof predicate !== 'function') ||
         !isIterator(iter)
     );
 }

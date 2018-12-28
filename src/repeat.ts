@@ -7,10 +7,10 @@ import {
 import { isIterator, isRepeatIterator } from './commons/utility';
 
 function repeat (
-    item: number | string | Function | IterableProtocol,
+    seq: number | string | Function | IterableProtocol,
     count: number
 ): IterableProtocol {
-    if (validateInputTypes(item, count)) {
+    if (validateInputTypes(seq, count)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
@@ -18,26 +18,26 @@ function repeat (
         throw new ArgumentError('Repeat count must be larger than 1.');
     }
 
-    if (isRepeatIterator(item as IterableProtocol)) {
+    if (isRepeatIterator(seq as IterableProtocol)) {
         throw new ArgumentError('Do not use infinite type iterator.');
     }
 
     let iterator: IterableProtocol;
-    if (!isIterator(item)) {
-        iterator = new PrimitiveIterator(item);
+    if (!isIterator(seq)) {
+        iterator = new PrimitiveIterator(seq);
     } else {
-        iterator = item;
+        iterator = seq;
     }
     return new RepeatIterator(iterator, count);
 }
 
-function validateInputTypes (item: any, count: number) {
+function validateInputTypes (seq: any, count: number) {
     return (
         typeof count !== 'number' ||
-        (typeof item !== 'number' &&
-            typeof item !== 'string' &&
-            typeof item !== 'function' &&
-            !isIterator(item))
+        (typeof seq !== 'number' &&
+            typeof seq !== 'string' &&
+            typeof seq !== 'function' &&
+            !isIterator(seq))
     );
 }
 
