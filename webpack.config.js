@@ -5,7 +5,7 @@ module.exports = {
     entry: path.resolve(__dirname, './src/index.ts'),
     output: {
         filename: 'iterize.min.js',
-        path: path.resolve(__dirname, 'lib/bundle'),
+        path: path.resolve(__dirname, 'dist'),
         library: 'Iterize',
         libraryTarget: 'umd'
     },
