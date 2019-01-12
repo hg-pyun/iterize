@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.3.0
+- Add change log and pull request templates
+- Add Eslint
+- Update babel version to 7.2.x
+- Support Universal Module Define
+- Reformatting codes
+
 ## 1.2.0
 - Add Higher-API Functions.
   - Support string type on cycle.
