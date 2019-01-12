@@ -40,7 +40,7 @@ import {range} from 'iterize';
 ```
 If you want to use [UMD](https://github.com/umdjs/umd), please import `dist/iterize.umd.js` on your html file.
 ```html
-<script src="iterize.umd.js" / >
+<script src="iterize.umd.js" />
 ```
 
 # API
