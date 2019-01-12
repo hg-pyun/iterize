@@ -1,7 +1,7 @@
 {
   "name": "iterize",
-  "version": "1.2.0",
-  "description": "Minimalistic Javascript Iterators",
+  "version": "1.3.0",
+  "description": "Use JavaScript Iterator, Easily",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
