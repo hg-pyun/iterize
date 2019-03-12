@@ -1,6 +1,4 @@
-export interface IterableProtocol extends IterableIterator<any> {
-    clone(): IterableProtocol;
-}
+import { IterableProtocol } from './types';
 export declare class PrimitiveIterator implements IterableProtocol {
     value: number | string | Function;
     done: boolean;

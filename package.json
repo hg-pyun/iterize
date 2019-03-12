@@ -25,7 +25,9 @@
     "reuse",
     "effective",
     "productive",
-    "tool"
+    "tool",
+    "functional",
+    "higher-order-function"
   ],
   "devDependencies": {
     "@babel/cli": "^7.2.3",
