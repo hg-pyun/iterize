@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.4.0
+- Add `*.d.ts` Files
+- Extract interfaces on `types.ts` file.
+
 ## 1.3.0
 - Add change log and pull request templates
 - Add Eslint

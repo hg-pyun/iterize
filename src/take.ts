@@ -1,6 +1,6 @@
 import { ArgumentError } from './commons/ErrorModels';
 import { isIterator } from './commons/utility';
-import { IterableProtocol } from './commons/Iterators';
+import { IterableProtocol } from './commons/types';
 
 function * take (predicate: number | Function, iter: IterableProtocol) {
     if (validateInputTypes(predicate, iter)) {

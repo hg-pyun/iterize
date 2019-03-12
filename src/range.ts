@@ -1,10 +1,11 @@
 import { ArgumentError } from './commons/ErrorModels';
-import { IterableProtocol, RangeIterator } from './commons/Iterators';
+import { RangeIterator } from './commons/Iterators';
+import { IterableProtocol } from './commons/types';
 
 function range (
     start: number,
     end?: number,
-    step?: number | Function
+    step?: number | Function,
 ): IterableProtocol {
     if (typeof end === 'undefined') {
         end = start;
@@ -43,7 +44,7 @@ function validateSameRage (start: number, end: number): boolean {
 function validateInputTypes (
     start: number,
     end?: number,
-    step?: number | Function
+    step?: number | Function,
 ) {
     return (
         typeof start !== 'number' ||
