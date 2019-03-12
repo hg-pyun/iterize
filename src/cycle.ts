@@ -1,10 +1,10 @@
 import { ArgumentError } from './commons/ErrorModels';
 import {
-    IterableProtocol,
     ArrayIterator,
     RepeatIterator,
 } from './commons/Iterators';
 import { isIterator, isRepeatIterator } from './commons/utility';
+import { IterableProtocol } from './commons/types';
 
 function cycle (seq: string | Array<any> | IterableProtocol): IterableProtocol {
     if (validateInputTypes(seq)) {

@@ -1,9 +1,5 @@
 import {BehaviorError} from './ErrorModels';
-
-export interface IterableProtocol extends IterableIterator<any> {
-    // this method should clone the initial state of iterator
-    clone(): IterableProtocol;
-}
+import { IterableProtocol } from './types';
 
 export class PrimitiveIterator implements IterableProtocol {
     value: number | string | Function;
