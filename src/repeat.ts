@@ -1,14 +1,14 @@
 import { ArgumentError } from './commons/ErrorModels';
 import {
-    IterableProtocol,
     PrimitiveIterator,
     RepeatIterator,
 } from './commons/Iterators';
 import { isIterator, isRepeatIterator } from './commons/utility';
+import { IterableProtocol } from './commons/types';
 
 function repeat (
     seq: number | string | Function | IterableProtocol,
-    count: number
+    count: number,
 ): IterableProtocol {
     if (validateInputTypes(seq, count)) {
         throw new ArgumentError('Please check arguments type.');
