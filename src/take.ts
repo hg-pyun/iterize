@@ -2,36 +2,40 @@ import { ArgumentError } from './commons/ErrorModels';
 import { isIterator } from './commons/utility';
 import { IterableProtocol } from './commons/types';
 
-function * take (predicate: number | Function, iter: IterableProtocol) {
-    if (validateInputTypes(predicate, iter)) {
+function * take (predicate: number, iter: IterableProtocol) {
+    if (validateTakeInputTypes(predicate, iter)) {
+        throw new ArgumentError('Please check arguments type.');
+    }
+    let index = 0;
+    while (index++ < predicate) {
+        yield iter.next().value;
+    }
+}
+
+function * takeWhile(predicate: Function, iter: IterableProtocol) {
+    if (validateTakeWhileInputTypes(predicate, iter)) {
         throw new ArgumentError('Please check arguments type.');
     }
 
-    if (typeof predicate === 'number') {
-        let index = 0;
-        while (index++ < predicate) {
-            yield iter.next().value;
+    while (true) {
+        const result = iter.next();
+
+        if (result.done) {
+            break;
         }
-    } else {
-        while (true) {
-            const result = iter.next();
 
-            if (result.done) {
-                break;
-            }
-
-            if (predicate(result.value)) {
-                yield result.value;
-            }
+        if (predicate(result.value)) {
+            yield result.value;
         }
     }
 }
 
-function validateInputTypes (predicate: number | Function, iter: IterableProtocol) {
-    return (
-        (typeof predicate !== 'number' && typeof predicate !== 'function') ||
-        !isIterator(iter)
-    );
+function validateTakeInputTypes (predicate: number | Function, iter: IterableProtocol) {
+    return typeof predicate !== 'number' || !isIterator(iter);
 }
 
-export default take;
+function validateTakeWhileInputTypes (predicate: number | Function, iter: IterableProtocol) {
+    return typeof predicate !== 'function' || !isIterator(iter);
+}
+
+export {take, takeWhile};
