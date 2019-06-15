@@ -73,11 +73,9 @@ describe('Test Take API', () => {
 
     describe('Edge case', () => {
         it('illegal input parameter', () => {
-            // @ts-ignore
-            expect(() => take(5, 5).next()).to.throw();
+            expect(() => take(5, <any>5).next()).to.throw();
 
-            // @ts-ignore
-            expect(() => take('a', cycle([1, 2, 3])).next()).to.throw();
+            expect(() => take(<any>'a', cycle([1, 2, 3])).next()).to.throw();
         });
     });
 });

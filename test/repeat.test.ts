@@ -78,14 +78,10 @@ describe('Test Repeat API', () => {
 
     describe('Edge case', () => {
         it('illegal input parameter', () => {
-            // @ts-ignore
-            expect(() => repeat(5, ['a']).next()).to.throw();
-            // @ts-ignore
-            expect(() => repeat(5, 'a').next()).to.throw();
-            // @ts-ignore
-            expect(() => repeat(5, undefined).next()).to.throw();
-            // @ts-ignore
-            expect(() => repeat(5, null).next()).to.throw();
+            expect(() => repeat(5, <any>['a']).next()).to.throw();
+            expect(() => repeat(5, <any>'a').next()).to.throw();
+            expect(() => repeat(5, <any>undefined).next()).to.throw();
+            expect(() => repeat(5, <any>null).next()).to.throw();
         });
 
         it('illegal input repeatIterator', () => {
