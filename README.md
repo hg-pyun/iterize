@@ -177,7 +177,7 @@ Returns the first N items of the iterator sequentially.
 #### Interface
 
 ```typescript
-take(taker: number | Function, iter: Iterator): Iterator
+take(predicate: number, iter: Iterator): Iterator
 ```
 
 #### Example
@@ -189,19 +189,19 @@ for (let number of take(5, cycleIterator)) {
     console.log(number);  // 1, 2, 3, 1, 2
 }
 ```
-```js
-import {take, range} from 'iterize';
+#### Interface
 
-for (let number of take(x => x < 3, range(5))) {
+```typescript
+takeWhile(predicate: Function, iter: Iterator): Iterator
+```
+
+#### Example
+```js
+import {takeWhile, range} from 'iterize';
+
+for (let number of takeWhile(x => x < 3, range(5))) {
     console.log(number);  // 0, 1, 2
 }
-```
-With the spread operator.
-```js
-import {take, cycle} from 'iterize';
-
-const cycleIterator = cycle([1, 2, 3]);
-[...take(5, cycleIterator)]; // [1, 2, 3, 1, 2]
 ```
 
 # CONTRIBUTING
