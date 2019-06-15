@@ -110,9 +110,7 @@ describe('Test Cycle API', () => {
 
     describe('Edge case', () => {
         it('illegal input parameter', () => {
-            // @ts-ignore
-            expect(() => cycle(1).next()).to.throw();
-            // @ts-ignore
+            expect(() => cycle(<any>1).next()).to.throw();
             expect(() => cycle([]).next()).to.throw();
         });
 

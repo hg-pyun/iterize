@@ -135,12 +135,9 @@ describe('Test Range API', () => {
 
     describe('Edge case', () => {
         it('illegal input parameter', () => {
-            // @ts-ignore
-            expect(() => range('a', 2, 3).next()).to.throw();
-            // @ts-ignore
-            expect(() => range(1, 'b', 3).next()).to.throw();
-            // @ts-ignore
-            expect(() => range(1, 2, '1').next()).to.throw();
+            expect(() => range(<any>'a', 2, 3).next()).to.throw();
+            expect(() => range(1, <any>'b', 3).next()).to.throw();
+            expect(() => range(1, 2, <any>'1').next()).to.throw();
         });
 
         it('start === end', () => {

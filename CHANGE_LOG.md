@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.5.0
+- Fix `@ts-ignore` to<any> 
+- Add `takeWhile` API
+- Replace `eslint` to `prettier`
+
 ## 1.4.0
 - Add `*.d.ts` Files
 - Extract interfaces on `types.ts` file.

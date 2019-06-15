@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {range, take, cycle, repeat} from '../src';
+import { range, take, cycle, repeat, takeWhile } from '../src';
 import {iterDone, iterResult} from './utility';
 
 describe('Test Take API', () => {
@@ -35,7 +35,7 @@ describe('Test Take API', () => {
     describe('takewhile', () => {
         it('range type', () => {
             const rangeIterator = range(5);
-            const iter = take((x: any) => x < 3, rangeIterator);
+            const iter = takeWhile((x: any) => x < 3, rangeIterator);
             expect(iter.next()).to.deep.equal(iterResult(0));
             expect(iter.next()).to.deep.equal(iterResult(1));
             expect(iter.next()).to.deep.equal(iterResult(2));
@@ -44,7 +44,7 @@ describe('Test Take API', () => {
 
         it('cycle type', () => {
             const cycleIterator = cycle([1, 2, 3]);
-            const iter = take((x: any) => x === 1, cycleIterator);
+            const iter = takeWhile((x: any) => x === 1, cycleIterator);
             expect(iter.next()).to.deep.equal(iterResult(1));
             expect(iter.next()).to.deep.equal(iterResult(1));
             expect(iter.next()).to.deep.equal(iterResult(1));
@@ -73,11 +73,10 @@ describe('Test Take API', () => {
 
     describe('Edge case', () => {
         it('illegal input parameter', () => {
-            // @ts-ignore
-            expect(() => take(5, 5).next()).to.throw();
-
-            // @ts-ignore
-            expect(() => take('a', cycle([1, 2, 3])).next()).to.throw();
+            expect(() => take(5, <any>5).next()).to.throw();
+            expect(() => take(<any>'a', cycle([1, 2, 3])).next()).to.throw();
+            expect(() => takeWhile(<any>5, cycle([1, 2, 3])).next()).to.throw();
+            expect(() => takeWhile(<any>'a', cycle([1, 2, 3])).next()).to.throw();
         });
     });
 });
